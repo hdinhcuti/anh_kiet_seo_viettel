@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --color-primary: #c3002a;
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+body {
+    /* font-family: 'TikTokFont', sans-serif; */
+    font-size: 1.4rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    background-color: var(--color-white);
+}
+
+input {
+    background-color: transparent;
+}
+
+li {
+    text-decoration: none;
+}
+
+button,
+input,
+[tabindex] {
+    border: none;
+    outline: none;
+}
+
+a[href] {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+}
