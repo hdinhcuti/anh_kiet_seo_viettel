@@ -4,13 +4,31 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-const Search = () => {
+interface IProps {
+    button?: boolean;
+    input?: boolean;
+    onClick?: () => void;
+}
+const Search = ({ button = false, input = false, onClick }: IProps) => {
     return (
-        <div className={cx('search-wrapper')}>
-            <div className={cx('input')}>
-                <input type="text" placeholder="Tìm kiếm..." />
+        <div
+            className={cx('search-wrapper', {
+                button,
+            })}
+        >
+            {input && (
+                <div className={cx('input')}>
+                    <input type="text" placeholder="Tìm kiếm..." />
+                </div>
+            )}
+            <div
+                className={cx('icon', {
+                    button,
+                })}
+                onClick={onClick}
+            >
+                {<SearchIcon />}
             </div>
-            <div className={cx('icon')}>{<SearchIcon />}</div>
         </div>
     );
 };
