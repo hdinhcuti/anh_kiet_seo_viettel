@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+@theme {
+    --color-primary: rgb(195, 0, 42);
+}
+@keyframes phoneRing {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(20deg);
+    }
+    20% {
+        transform: rotate(-20deg);
+    }
+    30% {
+        transform: rotate(15deg);
+    }
+    40% {
+        transform: rotate(-15deg);
+    }
+    50% {
+        transform: rotate(8deg);
+    }
+    60% {
+        transform: rotate(-8deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.animate-phoneRing {
+    animation: phoneRing 0.7s infinite linear;
+}
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: rgb(195, 0, 42);
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+body {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    background-color: var(--color-white);
+}
+
+input {
+    background-color: transparent;
+}
+
+li {
+    text-decoration: none;
+}
+
+button,
+input,
+[tabindex] {
+    border: none;
+    outline: none;
+}
+
+a[href] {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+}
