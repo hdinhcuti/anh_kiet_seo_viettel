@@ -1,6 +1,19 @@
 @use '@/styles/abstracts/mixins';
 
 .button-container {
+    width: 8rem;
+    height: 2.5rem;
+    padding: 0.3rem;
+    border-radius: 10px;
+    border: 1px solid var(--color-primary);
+
+    &.hover:hover {
+        transition: all 0.5s ease-in-out;
+        background-color: var(--color-primary);
+        .title {
+            color: var(--color-white);
+        }
+    }
 }
 
 .button-content {
@@ -10,5 +23,9 @@
 }
 
 .title {
-    font-size: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.5s ease-in-out;
+
+    color: var(--color-primary);
 }

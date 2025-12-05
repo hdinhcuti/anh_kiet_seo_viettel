@@ -2,9 +2,9 @@
 
 import Header from '@/components/layout/Header/Header';
 import Navbar from '@/components/layout/Navbar/Navbar';
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
-export default function HeaderGroup({ onOpenSidebar }: { onOpenSidebar: () => void }) {
+const HeaderGroup = forwardRef<HTMLDivElement, { onOpenSidebar: () => void }>(({ onOpenSidebar }, ref) => {
     const [hidden, setHidden] = useState(false);
     const [autoShown, setAutoShown] = useState(false); // đã auto-show chưa?
 
@@ -36,8 +36,9 @@ export default function HeaderGroup({ onOpenSidebar }: { onOpenSidebar: () => vo
 
     return (
         <div
+            ref={ref}
             className={`
-                fixed top-0 left-0 w-full z-[9997] bg-white
+                fixed top-0 left-0 w-full z-[9997] bg-white/90
                 transition-transform duration-500
                 ${hidden ? '-translate-y-full' : 'translate-y-0'}
             `}
@@ -51,4 +52,8 @@ export default function HeaderGroup({ onOpenSidebar }: { onOpenSidebar: () => vo
             </nav>
         </div>
     );
-}
+});
+
+HeaderGroup.displayName = 'HeaderGroup';
+
+export default HeaderGroup;
