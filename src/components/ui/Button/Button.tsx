@@ -15,6 +15,7 @@ export interface ButtonProps {
     primary?: boolean;
     resize?: boolean;
     hover?: boolean;
+    activeButton?: boolean;
     onClick?: () => void;
     medium?: boolean;
     small?: boolean;
@@ -31,13 +32,14 @@ const Button = ({
     primary,
     resize = false,
     hover = false,
+    activeButton = false,
     onClick,
     medium = false,
     small = false,
 }: ButtonProps) => {
     let Comp: React.ElementType = 'button';
 
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(activeButton);
 
     const compProps: any = { onClick };
 

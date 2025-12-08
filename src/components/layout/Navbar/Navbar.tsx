@@ -18,7 +18,7 @@ const Navbar = () => {
     return (
         <div className={cx('nav-bar-wrapper', 'hidden md:block')}>
             <div className={cx('nav-bar-container', 'flex justify-center altgn-center min-h-[3rem]')}>
-                <ul className="flex flex-wrap lg:justify-between justify-center items-center gap-10 text-white w-[80%] md:px-[2rem]">
+                <ul className="flex flex-wrap p-2 lg:justify-between justify-center items-center gap-10 text-white w-[80%] md:px-[2rem]">
                     <li className="flex items-center gap-5 cursor-pointer hover:text-gray-200 transition whitespace-nowrap font-semibold text-lg">
                         <Link href={PATH_CONFIG.internet} className="gap-2 flex items-center">
                             <div className="icon">

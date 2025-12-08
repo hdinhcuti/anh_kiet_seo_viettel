@@ -80,8 +80,5 @@ input,
 }
 
 a[href] {
-    display: flex;
-    align-items: center;
-    color: var(--text-color);
     text-decoration: none;
 }
