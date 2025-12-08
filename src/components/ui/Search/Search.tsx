@@ -22,7 +22,7 @@ const Search = ({ button = false, input = false, onClick }: IProps) => {
                 </div>
             )}
             <div
-                className={cx('icon', {
+                className={cx('icon', 'text-primary', {
                     button,
                 })}
                 onClick={onClick}

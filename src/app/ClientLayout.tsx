@@ -10,11 +10,26 @@ import zaloLogo from '@public/logo/zalo-logo.svg';
 import { IconMailShare } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 export default function ClientLayout({ children }: any) {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
     const [autoShown, setAutoShown] = useState(false);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const [headerHeight, setHeaderHeight] = useState(0);
+
+    useLayoutEffect(() => {
+        const updateHeaderHeight = () => {
+            if (headerRef.current) {
+                setHeaderHeight(headerRef.current.offsetHeight);
+            }
+        };
+
+        updateHeaderHeight();
+        window.addEventListener('resize', updateHeaderHeight);
+
+        return () => window.removeEventListener('resize', updateHeaderHeight);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -31,6 +46,18 @@ export default function ClientLayout({ children }: any) {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [autoShown]);
+
+    useEffect(() => {
+        const query = window.matchMedia('(min-width: 640px)');
+
+        const updateState = () => setSidebarOpen((prev) => false);
+
+        updateState();
+        query.addEventListener('change', updateState);
+
+        return () => query.removeEventListener('change', updateState);
+    }, []);
+
     return (
         <>
             {isSidebarOpen && (
@@ -40,21 +67,14 @@ export default function ClientLayout({ children }: any) {
                     aria-hidden="true"
                 />
             )}
-            {/* <header className="h-[70px]">
-                <Header onOpenSidebar={() => setSidebarOpen(true)} />
-            </header> */}
 
-            <HeaderGroup onOpenSidebar={() => setSidebarOpen((prev) => !prev)} />
+            <HeaderGroup ref={headerRef} onOpenSidebar={() => setSidebarOpen((prev) => !prev)} />
 
             <aside>
                 <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
             </aside>
 
-            {/* <nav>
-                <Navbar />
-            </nav> */}
-
-            <main>
+            <main style={{ paddingTop: headerHeight }}>
                 <div className="contact-btn fixed bottom-10 left-5 flex flex-col gap-10 z-9997 ">
                     <a
                         href="https://zalo.me/0987654321"
@@ -92,7 +112,7 @@ export default function ClientLayout({ children }: any) {
                         </div>
                     </Link>
                 </div>
-                {children}
+                <div className="">{children}</div>
             </main>
 
             {/* <footer>

@@ -14,6 +14,8 @@ export interface ButtonProps {
     login?: boolean;
     primary?: boolean;
     resize?: boolean;
+    hover?: boolean;
+    activeButton?: boolean;
     onClick?: () => void;
     medium?: boolean;
     small?: boolean;
@@ -29,14 +31,16 @@ const Button = ({
     login,
     primary,
     resize = false,
+    hover = false,
+    activeButton = false,
     onClick,
     medium = false,
     small = false,
 }: ButtonProps) => {
     let Comp: React.ElementType = 'button';
 
-    const [active, setActive] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [active, setActive] = useState(activeButton);
+
     const compProps: any = { onClick };
 
     const classes = (isActive?: boolean) =>
@@ -50,6 +54,7 @@ const Button = ({
                 small,
                 active: isActive,
                 resize: resize,
+                hover,
             },
             className,
         );

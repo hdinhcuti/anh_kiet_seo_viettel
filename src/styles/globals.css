@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @theme {
     --color-primary: rgb(195, 0, 42);
+    --color-black: #333333;
+    --color-gray: #666666;
 }
 @keyframes phoneRing {
     0% {
@@ -32,6 +34,18 @@
 .animate-phoneRing {
     animation: phoneRing 0.7s infinite linear;
 }
+
+.swiper-pagination-bullet {
+    background-color: var(--color-primary) !important;
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--color-primary) !important;
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -40,7 +54,7 @@
 :root {
     --color-primary: rgb(195, 0, 42);
     --color-white: #ffffff;
-    --color-black: #000000;
+    --color-black: #333333;
 }
 
 body {
@@ -66,8 +80,5 @@ input,
 }
 
 a[href] {
-    display: flex;
-    align-items: center;
-    color: var(--text-color);
     text-decoration: none;
 }
