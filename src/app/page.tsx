@@ -11,6 +11,8 @@ import 'swiper/css/pagination';
 import FeaturedPackages from '@/components/sections/FeaturedPackages';
 import ServiceCard from '@/components/ui/ServiceCard/ServiceCard';
 import Banner1 from '@public/images/banner-1.webp';
+
+import FeatureNews from '@/components/sections/FeaturedNews';
 import slideShowImg1 from '@public/images/slide-show-1.webp';
 import slideShowImg2 from '@public/images/slide-show-2.webp';
 const Home = () => {
@@ -46,7 +48,7 @@ const Home = () => {
                     </SwiperSlide>
                 </Swiper>
             </div>
-            <div className="home-container pt-[2rem] w-[100%] ">
+            <div className="home-container pt-[2rem] w-full ">
                 <div className="hero-title text-center flex justify-center items-center text-black h-[7rem] mx-auto">
                     <h1 className="w-200 px-[1.5rem]">
                         <strong className="sm:text-2xl md:text-3xl lg:text-4xl">
@@ -120,8 +122,11 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="featured-products pt-[2rem] w-[100%] ">
+                <div className="featured-products w-full pb-5">
                     <FeaturedPackages />
+                </div>
+                <div className="news-home w-full pb-5">
+                    <FeatureNews />
                 </div>
             </div>
         </div>

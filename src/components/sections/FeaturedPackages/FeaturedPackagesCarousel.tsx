@@ -20,7 +20,7 @@ const FeaturedPackagesCarousel = ({ items }: IProps) => {
                     640: { slidesPerView: 1.3 },
 
                     // PC nhỏ
-                    768: { slidesPerView: 1.5 },
+                    768: { slidesPerView: 1.8 },
 
                     // PC lớn
                     1024: { slidesPerView: 3 },
