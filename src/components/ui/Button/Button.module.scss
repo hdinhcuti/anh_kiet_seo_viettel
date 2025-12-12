@@ -1,37 +1,59 @@
 @use '@/styles/abstracts/mixins';
 
 .button-container {
-    width: 8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 0.3rem 1rem;
     height: 2.5rem;
-    padding: 0.3rem;
+
     border-radius: 10px;
     border: 2px solid var(--color-primary);
 
+    background-color: transparent;
+    cursor: pointer;
+
+    transition: all 0.35s ease-in-out;
+
     &.hover:hover {
-        transition: all 0.5s ease-in-out;
         background-color: var(--color-primary);
+
         .title {
             color: var(--color-white);
         }
+ 
+        .icon {
+            color: var(--color-white);
+        }
     }
+
     &.active {
-        transition: all 0.2s ease-in-out;
         background-color: var(--color-primary);
+
         .title {
             color: var(--color-white);
         }
+
+        .icon {
+            color: var(--color-white);
+        }
     }
-}
 
-.button-content {
-}
+    .icon {
+        display: flex;
+        align-items: center;
 
-.icon {
-}
+        color: var(--color-primary);
+        transition: inherit;
+    }
 
-.title {
-    font-size: 15px;
-    font-weight: 500;
-    transition: all 0.5s ease-in-out;
-    color: var(--color-primary);
+    .title {
+        font-size: 15px;
+        font-weight: 500;
+        transition: inherit;
+        color: var(--color-primary);
+        white-space: nowrap;
+    }
 }

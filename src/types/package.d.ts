@@ -1,4 +1,4 @@
-type PackageCategory = 'internet' | 'camera' | 'tv';
+type PackageCategory = 'internet' | 'camera' | 'tivi';
 
 export interface PackageItem {
     id: string;
@@ -11,5 +11,5 @@ export interface PackageItem {
 export interface PackageData {
     internet: PackageItem[];
     camera: PackageItem[];
-    tv: PackageItem[];
+    tivi: PackageItem[];
 }

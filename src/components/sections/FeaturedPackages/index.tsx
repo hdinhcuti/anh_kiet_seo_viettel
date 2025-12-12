@@ -44,7 +44,7 @@ export default function FeaturedPackages() {
             },
         ],
 
-        tv: [
+        tivi: [
             {
                 id: 'vtv_cab',
                 name: 'Gói Truyền hình Cơ bản',
@@ -62,8 +62,8 @@ export default function FeaturedPackages() {
         ],
     };
     return (
-        <section>
-            <h2 className="sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold mb-4 text-black pb-5">
+        <section className="bg-gray-100">
+            <h2 className="sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold mb-4 text-black py-5">
                 SẢN PHẨM NỔI BẬT
             </h2>
             <FeaturedPackagesTabs data={packagesData} />

@@ -1,93 +1,86 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import React from 'react';
 import styles from './Button.module.scss';
+
 const cx = classNames.bind(styles);
 
 export interface ButtonProps {
     icon?: React.ReactNode;
     children?: React.ReactNode;
-    to?: string;
-    href?: string;
+    href?: string; // Link or <a>
+    to?: string; // open external link
     className?: string;
+    primary?: boolean;
     search?: boolean;
     login?: boolean;
-    primary?: boolean;
-    resize?: boolean;
-    hover?: boolean;
-    activeButton?: boolean;
-    onClick?: () => void;
     medium?: boolean;
     small?: boolean;
+    active?: boolean;
+    resize?: boolean;
+    hover?: boolean;
+    onClick?: () => void;
 }
 
-const Button = ({
+export default function Button({
     icon,
     children,
-    to,
     href,
+    to,
     className,
+    primary,
     search,
     login,
-    primary,
-    resize = false,
-    hover = false,
-    activeButton = false,
+    medium,
+    small,
+    active,
+    resize,
+    hover,
     onClick,
-    medium = false,
-    small = false,
-}: ButtonProps) => {
-    let Comp: React.ElementType = 'button';
+}: ButtonProps) {
+    const pathname = usePathname();
+    const isActive = href === pathname;
 
-    const [active, setActive] = useState(activeButton);
-
-    const compProps: any = { onClick };
-
-    const classes = (isActive?: boolean) =>
-        cx(
-            'button-container',
-            {
-                search,
-                primary,
-                login,
-                medium,
-                small,
-                active: isActive,
-                resize: resize,
-                hover,
-            },
-            className,
-        );
+    const classes = cx(
+        'button-container',
+        {
+            primary,
+            search,
+            login,
+            medium,
+            small,
+            resize,
+            hover,
+            active: isActive || active,
+        },
+        className,
+    );
 
     if (to) {
-        Comp = Link;
-        compProps.to = to;
-        compProps.className = (navActive: { isActive: boolean }) => {
-            setActive(navActive.isActive);
-            return classes(navActive.isActive);
-        };
-    } else if (href) {
-        Comp = 'a';
-        compProps.href = href;
-        compProps.className = classes();
-    } else {
-        compProps.className = classes();
+        return (
+            <Link href={to} className={classes}>
+                {icon && <div className={cx('icon')}>{icon}</div>}
+                <div className={cx('title')}>{children}</div>
+            </Link>
+        );
+    }
+
+    if (href) {
+        return (
+            <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+                {icon && <div className={cx('icon')}>{icon}</div>}
+                <div className={cx('title')}>{children}</div>
+            </a>
+        );
     }
 
     return (
-        <Comp {...compProps}>
-            <div className={cx('button-content')}>
-                {icon && (
-                    <div className={cx('icon')}>
-                        {React.isValidElement(icon)
-                            ? React.cloneElement(icon as React.ReactElement<{ active?: boolean }>, { active })
-                            : icon}
-                    </div>
-                )}
-                <div className={cx('title')}>{children}</div>
-            </div>
-        </Comp>
+        <button onClick={onClick} className={classes}>
+            {icon && <div className={cx('icon')}>{icon}</div>}
+            <div className={cx('title')}>{children}</div>
+        </button>
     );
-};
-
-export default Button;
+}
