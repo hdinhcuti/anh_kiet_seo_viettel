@@ -11,33 +11,33 @@ interface IProps {
 }
 const FeaturedNewsCarousel = ({ items }: IProps) => {
     return (
-        <div className="lg:w-full md:w-[700px] min-w-[300px] bg-gray-300 rounded-xl">
+        <div className="lg:w-full md:w-[700px] min-w-[300px] rounded-xl">
             <Swiper
                 direction="horizontal"
                 breakpoints={{
                     0: {
-                        slidesPerView: 3,
+                        slidesPerView: 4.3,
                         direction: 'vertical',
                     },
                     640: {
-                        slidesPerView: 3,
+                        slidesPerView: 4.3,
                         direction: 'vertical',
                     },
                     768: {
-                        slidesPerView: 4,
+                        slidesPerView: 4.3,
                         direction: 'vertical',
                     },
                     1024: {
-                        slidesPerView: 4.1,
+                        slidesPerView: 3.1,
                         direction: 'horizontal',
                     },
                 }}
-                spaceBetween={5}
+                spaceBetween={1}
                 grabCursor={true}
                 className="
                     carousel-product
                     h-[460px]
-                    md:h-[615px]
+                    md:h-[630px]
                     lg:h-full
                     [&_.swiper-slide]:!h-[150px]
                     lg:[&_.swiper-slide]:!h-full
