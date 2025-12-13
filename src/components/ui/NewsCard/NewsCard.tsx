@@ -30,16 +30,14 @@ const NewsCard = ({ item }: IProps) => {
                     <div className="time-ago">{time}</div>
                     <div className="date-original">{formatVNDate(item.date)}</div>
                 </div>
-                <h5 className="title text-primary lg:text-xl sm:text-lg text-sm line-clamp-1 lg:pb-2 pb-6">
+                <h5 className="title text-primary lg:text-xl sm:text-lg text-sm line-clamp-1">
                     <strong>{item.title}</strong>
                 </h5>
-                <div className="description pb-5">
+                <div className="description pb-5 pt-1">
                     <p className="text-gray-700 text-sm leading-6 line-clamp-1">{item.description}</p>
                 </div>
                 <div className="detail hidden lg:flex justify-center ">
-                    <Button hover to={`/${item.slug}`}>
-                        Xem chi tiết
-                    </Button>
+                    <Button hover>Xem chi tiết</Button>
                 </div>
             </div>
         </Link>

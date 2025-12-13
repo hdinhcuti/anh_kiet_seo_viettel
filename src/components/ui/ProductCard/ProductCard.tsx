@@ -9,7 +9,7 @@ const ProductCard = ({ item }: IProps) => {
         <div className="product-card-wrapper bg-white rounded-2xl w-70 md:w-120 rounded-2xl shadow-sm hover:-translate-y-3 transition-transform duration-500 ease-in-out hover:shadow-lg/20 transition-shadow duration-300 ease-in-out cursor-pointer">
             <div className="header h-15 bg-gradient-to-r from-primary to-[#f90233] rounded-t-2xl p-8">
                 <h4 className="title text-white text-2xl h-full flex justify-start items-center">
-                    <strong>{item.name}</strong>
+                    <strong className="line-clamp-1">{item.name}</strong>
                 </h4>
             </div>
             <div className="content flex flex-col p-5">
