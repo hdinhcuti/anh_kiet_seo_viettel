@@ -14,7 +14,7 @@ interface IProps<T extends string> {
 
 const Tabs = <T extends string>({ items, selected, onChange, className }: IProps<T>) => {
     return (
-        <div className={`flex gap-3 grid  lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1 ${className || ''}`}>
+        <div className={`flex gap-3 lg:flex-row md:flex-row flex-col ${className || ''}`}>
             {items.map((item, index) => {
                 const isActive = selected === item.value;
                 return (

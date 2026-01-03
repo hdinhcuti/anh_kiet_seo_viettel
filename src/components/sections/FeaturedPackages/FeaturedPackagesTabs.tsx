@@ -26,7 +26,11 @@ export default function FeaturedPackagesTabs({ data }: IProps) {
                     <FeaturedPackagesCarousel items={data[selected]} />
                 </div>
 
-                <Button to={`/${selected}`} active icon={<IconCircleChevronDown height={`1.5rem`} width={`1.5rem`} />}>
+                <Button
+                    to={`/${selected}`}
+                    active
+                    rightIcon={<IconCircleChevronDown height={`1.5rem`} width={`1.5rem`} />}
+                >
                     Xem tất cả
                 </Button>
             </div>

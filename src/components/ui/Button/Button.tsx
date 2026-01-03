@@ -9,7 +9,8 @@ import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
 export interface ButtonProps {
-    icon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    leftIcon?: React.ReactNode;
     children?: React.ReactNode;
     href?: string; // Link or <a>
     to?: string; // open external link
@@ -26,7 +27,8 @@ export interface ButtonProps {
 }
 
 export default function Button({
-    icon,
+    rightIcon,
+    leftIcon,
     children,
     href,
     to,
@@ -62,8 +64,9 @@ export default function Button({
     if (to) {
         return (
             <Link href={to} className={classes}>
-                {icon && <div className={cx('icon')}>{icon}</div>}
+                {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
                 <div className={cx('title')}>{children}</div>
+                {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
             </Link>
         );
     }
@@ -71,16 +74,18 @@ export default function Button({
     if (href) {
         return (
             <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
-                {icon && <div className={cx('icon')}>{icon}</div>}
+                {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
                 <div className={cx('title')}>{children}</div>
+                {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
             </a>
         );
     }
 
     return (
         <button onClick={onClick} className={classes}>
-            {icon && <div className={cx('icon')}>{icon}</div>}
+            {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
             <div className={cx('title')}>{children}</div>
+            {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
         </button>
     );
 }

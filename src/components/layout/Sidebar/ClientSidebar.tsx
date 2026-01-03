@@ -38,6 +38,7 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                             <Link
                                 href={PATH_CONFIG.internet}
                                 className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
                             >
                                 <div className="menu-item w-[80%] flex align-center gap-2">
                                     <div className="icon text-white">
@@ -52,6 +53,7 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                             <Link
                                 href={PATH_CONFIG.tivi}
                                 className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
                             >
                                 <div className="menu-item w-[80%] flex align-center gap-2">
                                     <div className="icon text-white">
@@ -66,6 +68,7 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                             <Link
                                 href={PATH_CONFIG['smart-phone']}
                                 className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
                             >
                                 <div className="menu-item w-[80%] flex align-center gap-2">
                                     <div className="icon text-white">
@@ -80,6 +83,7 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                             <Link
                                 href={PATH_CONFIG.business}
                                 className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
                             >
                                 <div className="menu-item w-[80%] flex align-center gap-2">
                                     <div className="icon text-white">
@@ -93,6 +97,7 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                             <Link
                                 href={PATH_CONFIG['news-paper']}
                                 className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
                             >
                                 <div className="menu-item w-[80%] flex align-center gap-2">
                                     <div className="icon text-white">
@@ -107,6 +112,7 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                             <Link
                                 href={PATH_CONFIG.contact}
                                 className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
                             >
                                 <div className="menu-item w-[80%] flex align-center gap-2">
                                     <div className="icon text-white">

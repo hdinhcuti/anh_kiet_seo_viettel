@@ -33,12 +33,12 @@ export default function ClientHeader({ onOpenSidebar }: any) {
             >
                 <ul className={cx('nav-list', 'flex flex-row gap-[1rem] text-base hidden md:flex')}>
                     <li className="text-gray-500 font-bold">
-                        <Link className="flex items-center gap-1 text-nowrap" href={PATH_CONFIG.contact}>
+                        <Link className="flex justify-center items-center gap-1 text-nowrap" href={PATH_CONFIG.contact}>
                             {<ContactIcon />} Liên hệ
                         </Link>
                     </li>
                     <li className="text-gray-500 font-bold">
-                        <Link className="flex items-center gap-1 text-nowrap" href={PATH_CONFIG.phone}>
+                        <Link className="flex justify-center items-center gap-1 text-nowrap" href={PATH_CONFIG.phone}>
                             {<PhoneIcon />} 0987654321
                         </Link>
                     </li>

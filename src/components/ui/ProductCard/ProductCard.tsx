@@ -12,9 +12,9 @@ const ProductCard = ({ item }: IProps) => {
                     <strong className="line-clamp-1">{item.name}</strong>
                 </h4>
             </div>
-            <div className="content flex flex-col p-5">
+            <div className="content flex flex-col md:p-5 p-3">
                 <div className="speed-container flex gap-2 pb-2">
-                    <div className="icon p-1 w-10 rounded-xl bg-gray-200">
+                    <div className="icon p-1 w-10 h-10 rounded-xl bg-gray-200">
                         <IconBrandSpeedtest width={'2rem'} height={'2rem'} />
                     </div>
                     <div className="speed font-bold">{item.speed}</div>

@@ -2,6 +2,7 @@
 import { useRelativeTime } from '@/hooks/useRelativeTime';
 import { NewsSummary } from '@/types/news';
 import { formatVNDate } from '@/utils/formatTime';
+import { IconChevronRight } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../Button/Button';
@@ -37,7 +38,9 @@ const NewsCard = ({ item }: IProps) => {
                     <p className="text-gray-700 text-sm leading-6 line-clamp-1">{item.description}</p>
                 </div>
                 <div className="detail hidden lg:flex justify-center ">
-                    <Button hover>Xem chi tiết</Button>
+                    <Button leftIcon={<IconChevronRight width={20} />} hover>
+                        Xem chi tiết
+                    </Button>
                 </div>
             </div>
         </Link>
