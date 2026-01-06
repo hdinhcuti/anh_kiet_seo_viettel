@@ -57,7 +57,7 @@ export function AlignToolbarButton(props: DropdownMenuProps) {
                 </ToolbarButton>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="min-w-0 bg-white" align="start">
+            <DropdownMenuContent className="min-w-0 " align="start">
                 <DropdownMenuRadioGroup
                     value={value}
                     onValueChange={(value) => {
