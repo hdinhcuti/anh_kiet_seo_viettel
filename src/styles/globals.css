@@ -1,4 +1,8 @@
 @import 'tailwindcss';
+
+@plugin 'tailwind-scrollbar-hide';
+
+@custom-variant dark (&:is(.dark *));
 @theme {
     --color-primary: rgb(195, 0, 42);
     --color-black: #333333;
@@ -54,13 +58,15 @@
     --color-primary: rgb(195, 0, 42);
     --color-white: #ffffff;
     --color-black: #333333;
+    --highlight: oklch(0.852 0.199 91.936);
+    --brand: oklch(0.623 0.214 259.815);
 }
 
 body {
     font-size: 1.4rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
-    background-color: var(--color-white);
+    background-color: #f1f5f9;
 }
 
 input {
@@ -81,3 +87,28 @@ input,
 a[href] {
     text-decoration: none;
 }
+
+.slate-editable p {
+    line-height: 1.4;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
+.dark {
+    --highlight: oklch(0.852 0.199 91.936);
+    --brand: oklch(0.707 0.165 254.624);
+}
+
+@theme inline {
+    --color-highlight: var(--highlight);
+    --color-brand: var(--brand);
+}
+
+/* @layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+} */
