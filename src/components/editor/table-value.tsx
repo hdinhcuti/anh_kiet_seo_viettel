@@ -3,115 +3,111 @@ import { jsx } from '@platejs/test-utils';
 jsx;
 
 export const createTable = (spanning?: boolean): any => (
-  <>
-    <htable colSizes={[100, 100, 100, 100]} marginLeft={20}>
-      {spanning ? (
-        <htr>
-          <hth colSpan={4}>
-            <hp>
-              <htext bold>Plugin</htext>
-            </hp>
-          </hth>
-        </htr>
-      ) : (
-        <htr>
-          <hth>
-            <hp>
-              <htext bold>Plugin</htext>
-            </hp>
-          </hth>
-          <hth>
-            <hp>
-              <htext bold>Element</htext>
-            </hp>
-          </hth>
-          <hth>
-            <hp>
-              <htext bold>Inline</htext>
-            </hp>
-          </hth>
-          <hth>
-            <hp>
-              <htext bold>Void</htext>
-            </hp>
-          </hth>
-        </htr>
-      )}
+  <table style={{ marginLeft: 20 }}>
+    <colgroup>
+      <col style={{ width: 100 }} />
+      <col style={{ width: 100 }} />
+      <col style={{ width: 100 }} />
+      <col style={{ width: 100 }} />
+    </colgroup>
+    {spanning ? (
+      <tr>
+        <th colSpan={4}>
+          <p>
+            <strong>Plugin</strong>
+          </p>
+        </th>
+      </tr>
+    ) : (
+      <tr>
+        <th>
+          <p>
+            <strong>Plugin</strong>
+          </p>
+        </th>
+        <th>
+          <p>
+            <strong>Element</strong>
+          </p>
+        </th>
+        <th>
+          <p>
+            <strong>Inline</strong>
+          </p>
+        </th>
+        <th>
+          <p>
+            <strong>Void</strong>
+          </p>
+        </th>
+      </tr>
+    )}
 
-      <htr>
-        <htd>
-          <hp>
-            <htext bold>Heading</htext>
-          </hp>
-        </htd>
-        <htd>
-          <hp>
-            <htext />
-          </hp>
-        </htd>
-        <htd>
-          <hp>
-            <htext />
-          </hp>
-        </htd>
-        <htd>
-          <hp>No</hp>
-        </htd>
-      </htr>
-      <htr>
-        <htd>
-          <hp>
-            <htext bold>Image</htext>
-          </hp>
-        </htd>
-        <htd>
-          <hp>Yes</hp>
-        </htd>
-        <htd>
-          <hp>No</hp>
-        </htd>
-        <htd>
-          <hp>Yes</hp>
-        </htd>
-      </htr>
-      <htr>
-        <htd>
-          <hp>
-            <htext bold>Mention</htext>
-          </hp>
-        </htd>
-        <htd>
-          <hp>Yes</hp>
-        </htd>
-        <htd>
-          <hp>Yes</hp>
-        </htd>
-        <htd>
-          <hp>Yes</hp>
-        </htd>
-      </htr>
-    </htable>
-  </>
+    <tr>
+      <td>
+        <p>
+          <strong>Heading</strong>
+        </p>
+      </td>
+      <td>
+        <p />
+      </td>
+      <td>
+        <p />
+      </td>
+      <td>
+        <p>No</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>
+          <strong>Image</strong>
+        </p>
+      </td>
+      <td>
+        <p>Yes</p>
+      </td>
+      <td>
+        <p>No</p>
+      </td>
+      <td>
+        <p>Yes</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>
+          <strong>Mention</strong>
+        </p>
+      </td>
+      <td>
+        <p>Yes</p>
+      </td>
+      <td>
+        <p>Yes</p>
+      </td>
+      <td>
+        <p>Yes</p>
+      </td>
+    </tr>
+  </table>
 );
 
-export const tableValue: any = (
-  <>
-    <hh2>Table</hh2>
-    <hp>
-      Create customizable tables with resizable columns and rows, allowing you
-      to design structured layouts.
-    </hp>
-    {createTable()}
-  </>
-);
+export const tableValue: any = [
+  <h2>Table</h2>,
+  <p>
+    Create customizable tables with resizable columns and rows, allowing you
+    to design structured layouts.
+  </p>,
+  createTable(),
+];
 
-export const tableMergeValue: any = (
-  <>
-    <hh3>Table Merge</hh3>
-    <hp>
-      You can disable merging using <htext code>disableMerge: true</htext>{' '}
-      option. Try it out:
-    </hp>
-    {createTable(true)}
-  </>
-);
+export const tableMergeValue: any = [
+  <h3>Table Merge</h3>,
+  <p>
+    You can disable merging using <code>disableMerge: true</code> option. Try
+    it out:
+  </p>,
+  createTable(true),
+];

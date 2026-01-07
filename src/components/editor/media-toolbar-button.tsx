@@ -17,6 +17,12 @@ import { useEditorRef } from 'platejs/react';
 import { toast } from 'sonner';
 import { useFilePicker } from 'use-file-picker';
 
+type SelectedFilesOrErrors = {
+  plainFiles?: File[];
+  filesContent?: any[];
+  errors?: any[];
+};
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -90,8 +96,9 @@ export function MediaToolbarButton({
   const { openFilePicker } = useFilePicker({
     accept: currentConfig.accept,
     multiple: true,
-    onFilesSelected: ({ plainFiles: updatedFiles }) => {
-      editor.getTransforms(PlaceholderPlugin).insert.media(updatedFiles);
+    onFilesSelected: (data: SelectedFilesOrErrors) => {
+      const updatedFiles = data.plainFiles ?? [];
+      editor.getTransforms(PlaceholderPlugin).insert.media(updatedFiles as any);
     },
   });
 

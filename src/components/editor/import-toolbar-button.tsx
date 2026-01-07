@@ -22,6 +22,12 @@ import { ToolbarButton } from './toolbar';
 
 type ImportType = 'html' | 'markdown';
 
+type SelectedFilesOrErrors = {
+  plainFiles?: File[];
+  filesContent?: any[];
+  errors?: any[];
+};
+
 export function ImportToolbarButton(props: DropdownMenuProps) {
   const editor = useEditorRef();
   const [open, setOpen] = React.useState(false);
@@ -46,24 +52,24 @@ export function ImportToolbarButton(props: DropdownMenuProps) {
   const { openFilePicker: openMdFilePicker } = useFilePicker({
     accept: ['.md', '.mdx'],
     multiple: false,
-    onFilesSelected: async ({ plainFiles }) => {
-      const text = await plainFiles[0].text();
-
-      const nodes = getFileNodes(text, 'markdown');
-
-      editor.tf.insertNodes(nodes);
+    onFilesSelected: async (data: SelectedFilesOrErrors) => {
+      if (data.plainFiles?.[0]) {
+        const text = await data.plainFiles[0].text();
+        const nodes = getFileNodes(text, 'markdown');
+        editor.tf.insertNodes(nodes);
+      }
     },
   });
 
   const { openFilePicker: openHtmlFilePicker } = useFilePicker({
     accept: ['text/html'],
     multiple: false,
-    onFilesSelected: async ({ plainFiles }) => {
-      const text = await plainFiles[0].text();
-
-      const nodes = getFileNodes(text, 'html');
-
-      editor.tf.insertNodes(nodes);
+    onFilesSelected: async (data: SelectedFilesOrErrors) => {
+      if (data.plainFiles?.[0]) {
+        const text = await data.plainFiles[0].text();
+        const nodes = getFileNodes(text, 'html');
+        editor.tf.insertNodes(nodes);
+      }
     },
   });
 

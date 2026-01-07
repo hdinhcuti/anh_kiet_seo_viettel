@@ -2,23 +2,17 @@ import { jsx } from '@platejs/test-utils';
 
 jsx;
 
-export const mentionValue: any = (
-  <>
-    <hh2>Mention</hh2>
-    <hp>
-      Mention and reference other users or entities within your text using
-      @-mentions.
-    </hp>
-    <hp>
-      Try mentioning{' '}
-      <hmention key="mention_id_1" value="BB-8">
-        <htext />
-      </hmention>{' '}
-      or{' '}
-      <hmention key="mention_id_2" value="Boba Fett">
-        <htext />
-      </hmention>
-      .
-    </hp>
-  </>
-);
+export const mentionValue: any = [
+  <h2>Mention</h2>,
+  <p>
+    Mention and reference other users or entities within your text using
+    @-mentions.
+  </p>,
+  <p>
+    Try mentioning{' '}
+    <span>@BB-8</span>{' '}
+    or{' '}
+    <span>@Boba Fett</span>
+    .
+  </p>,
+];

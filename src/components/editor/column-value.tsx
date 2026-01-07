@@ -2,19 +2,17 @@ import { jsx } from '@platejs/test-utils';
 
 jsx;
 
-export const columnValue: any = (
-  <>
-    <hh2>Column</hh2>
-    <hp>Create column and the border will hidden when viewing</hp>
-    <hcolumngroup layout={[50, 50]}>
-      <hcolumn width="50%">
-        <hp>left 1</hp>
-        <hp>left 2</hp>
-      </hcolumn>
-      <hcolumn width="50%">
-        <hp>right 1</hp>
-        <hp>right 2</hp>
-      </hcolumn>
-    </hcolumngroup>
-  </>
-);
+export const columnValue: any = [
+  <h2>Column</h2>,
+  <p>Create column and the border will hidden when viewing</p>,
+  <div style={{ display: 'flex' }}>
+    <div style={{ width: '50%' }}>
+      <p>left 1</p>
+      <p>left 2</p>
+    </div>
+    <div style={{ width: '50%' }}>
+      <p>right 1</p>
+      <p>right 2</p>
+    </div>
+  </div>,
+];

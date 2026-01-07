@@ -2,63 +2,61 @@ import { jsx } from '@platejs/test-utils';
 
 jsx;
 
-export const tocValue: any = (
-  <>
-    <hh1>
-      <htext>Table of Contents</htext>
-    </hh1>
-    <hp>
-      <htext>
-        The Table of Contents (TOC) feature allows you to create an
-        automatically updated overview of your document's structure.
-      </htext>
-    </hp>
-    <hp>How to use the Table of Contents:</hp>
-    <hp indent={1} listStyleType="disc">
-      <htext>Type "/toc" and press Enter to create the TOC.</htext>
-    </hp>
-    <hp indent={1} listStyleType="disc">
-      <htext>
+export const tocValue: any = [
+  <h1>
+    <span>Table of Contents</span>
+  </h1>,
+  <p>
+    <span>
+      The Table of Contents (TOC) feature allows you to create an
+      automatically updated overview of your document's structure.
+    </span>
+  </p>,
+  <p>How to use the Table of Contents:</p>,
+  <ul>
+    <li>
+      <span>Type "/toc" and press Enter to create the TOC.</span>
+    </li>
+    <li>
+      <span>
         The TOC updates automatically when you modify headings in the document.
-      </htext>
-    </hp>
-    <htoc>
-      <htext />
-    </htoc>
-    <hh2>Example Content</hh2>
-    <hp>
-      <htext>
-        This is an example of content that would be reflected in the Table of
-        Contents.
-      </htext>
-    </hp>
-    <hh3>Subsection</hh3>
-    <hp>
-      <htext>
-        Adding or modifying headings in your document will automatically update
-        the TOC.
-      </htext>
-    </hp>
-    <hh2>Benefits of Using TOC</hh2>
-    <hp>
-      <htext>
-        A Table of Contents improves document navigation and provides a quick
-        overview of your content structure.
-      </htext>
-    </hp>
-  </>
-);
+      </span>
+    </li>
+  </ul>,
+  <div>
+    <span></span>
+  </div>,
+  <h2>Example Content</h2>,
+  <p>
+    <span>
+      This is an example of content that would be reflected in the Table of
+      Contents.
+    </span>
+  </p>,
+  <h3>Subsection</h3>,
+  <p>
+    <span>
+      Adding or modifying headings in your document will automatically update
+      the TOC.
+    </span>
+  </p>,
+  <h2>Benefits of Using TOC</h2>,
+  <p>
+    <span>
+      A Table of Contents improves document navigation and provides a quick
+      overview of your content structure.
+    </span>
+  </p>,
+];
 
-export const tocPlaygroundValue: any = (
-  <>
-    <htoc>
-      <htext />
-    </htoc>
-    <hp>
-      <htext>
-        Click on any heading in the table of contents to smoothly scroll to that
-        section.
-      </htext>
-    </hp>
-  </>
-);
+export const tocPlaygroundValue: any = [
+  <div>
+    <span></span>
+  </div>,
+  <p>
+    <span>
+      Click on any heading in the table of contents to smoothly scroll to that
+      section.
+    </span>
+  </p>,
+];

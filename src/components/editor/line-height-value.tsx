@@ -2,16 +2,14 @@ import { jsx } from '@platejs/test-utils';
 
 jsx;
 
-export const lineHeightValue: any = (
-  <>
-    <hh2>Line Height</hh2>
-    <hp>
-      Control the line height of your text to improve readability and adjust the
-      spacing between lines.
-    </hp>
-    <hp lineHeight={2}>
-      Choose the ideal line height to ensure comfortable reading and an
-      aesthetically pleasing document.
-    </hp>
-  </>
-);
+export const lineHeightValue: any = [
+  <h2>Line Height</h2>,
+  <p>
+    Control the line height of your text to improve readability and adjust the
+    spacing between lines.
+  </p>,
+  <p style={{ lineHeight: 2 }}>
+    Choose the ideal line height to ensure comfortable reading and an
+    aesthetically pleasing document.
+  </p>,
+];

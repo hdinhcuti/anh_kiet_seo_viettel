@@ -18,6 +18,12 @@ import { useFilePicker } from 'use-file-picker';
 import { cn } from '@/lib/utils';
 import { useUploadFile } from '@/hooks/use-upload-file';
 
+type SelectedFilesOrErrors = {
+  plainFiles?: File[];
+  filesContent?: any[];
+  errors?: any[];
+};
+
 const CONTENT: Record<
   string,
   {
@@ -69,14 +75,17 @@ export const PlaceholderElement = withHOC(
     const { openFilePicker } = useFilePicker({
       accept: currentContent.accept,
       multiple: true,
-      onFilesSelected: ({ plainFiles: updatedFiles }) => {
+      onFilesSelected: (data: SelectedFilesOrErrors) => {
+        const updatedFiles = data.plainFiles ?? [];
         const firstFile = updatedFiles[0];
         const restFiles = updatedFiles.slice(1);
 
-        replaceCurrentPlaceholder(firstFile);
+        if (firstFile) {
+          replaceCurrentPlaceholder(firstFile);
+        }
 
         if (restFiles.length > 0) {
-          editor.getTransforms(PlaceholderPlugin).insert.media(restFiles);
+          editor.getTransforms(PlaceholderPlugin).insert.media(restFiles as any);
         }
       },
     });
@@ -218,7 +227,7 @@ export function ImageProgress({
       />
       {progress < 100 && (
         <div className="absolute right-1 bottom-1 flex items-center space-x-2 rounded-full bg-black/50 px-1 py-0.5">
-          <Loader2Icon className="size-3.5 animate-spin text-muted-foreground" />
+          <Loader2Icon className="mr-1 size-3.5 animate-spin text-muted-foreground" />
           <span className="font-medium text-white text-xs">
             {Math.round(progress)}%
           </span>

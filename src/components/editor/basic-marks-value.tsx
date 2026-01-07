@@ -2,32 +2,32 @@ import { jsx } from '@platejs/test-utils';
 
 jsx;
 
-export const basicMarksValue: any = (
-  <>
-    <hh2>Text Formatting</hh2>
-    <hp>
-      Add style and emphasis to your text using various formatting options.
-    </hp>
-    <hp>
-      Make text <htext bold>bold</htext>, <htext italic>italic</htext>,{' '}
-      <htext underline>underlined</htext>, or apply a{' '}
-      <htext bold italic underline>
-        combination
-      </htext>{' '}
-      of these styles for emphasis.
-    </hp>
-    <hp>
-      Add <htext strikethrough>strikethrough</htext> to indicate deleted
-      content, use <htext code>inline code</htext> for technical terms, or{' '}
-      <htext highlight>highlight</htext> important information.
-    </hp>
-    <hp>
-      Format mathematical expressions with <htext subscript>subscript</htext>{' '}
-      and <htext superscript>superscript</htext> text.
-    </hp>
-    <hp>
-      Show keyboard shortcuts like <htext kbd>⌘ + B</htext> for bold or{' '}
-      <htext kbd>⌘ + I</htext> for italic formatting.
-    </hp>
-  </>
-);
+export const basicMarksValue: any = [
+  <h2>Text Formatting</h2>,
+  <p>
+    Add style and emphasis to your text using various formatting options.
+  </p>,
+  <p>
+    Make text <strong>bold</strong>, <em>italic</em>,{' '}
+    <u>underlined</u>, or apply a{' '}
+    <strong>
+      <em>
+        <u>combination</u>
+      </em>
+    </strong>{' '}
+    of these styles for emphasis.
+  </p>,
+  <p>
+    Add <s>strikethrough</s> to indicate deleted
+    content, use <code>inline code</code> for technical terms, or{' '}
+    <mark>highlight</mark> important information.
+  </p>,
+  <p>
+    Format mathematical expressions with <sub>subscript</sub>{' '}
+    and <sup>superscript</sup> text.
+  </p>,
+  <p>
+    Show keyboard shortcuts like <kbd>⌘ + B</kbd> for bold or{' '}
+    <kbd>⌘ + I</kbd> for italic formatting.
+  </p>,
+];

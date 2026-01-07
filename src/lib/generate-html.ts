@@ -3,8 +3,8 @@ import { serializeHtml } from 'platejs/static'; // Static import
 // Import base plugins (NOT from /react paths)
 import { BaseHeadingPlugin } from '@platejs/basic-nodes';
 // Import your STATIC components for rendering
-import { HeadingElementStatic } from '@/components/ui/heading-node-static';
-import { ParagraphElementStatic } from '@/components/ui/paragraph-node-static';
+import { HeadingElementStatic } from '@/components/editor/heading-node-static';
+import { ParagraphElementStatic } from '@/components/editor/paragraph-node-static';
 // For a styled static output, you might use a wrapper like EditorStatic
 
 // Map plugin keys to their STATIC rendering components
