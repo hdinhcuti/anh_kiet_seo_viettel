@@ -8,14 +8,15 @@ import Link from 'next/link';
 import Button from '../Button/Button';
 interface IProps {
     item: NewsSummary;
+    classNames?: string;
 }
 
-const NewsCard = ({ item }: IProps) => {
+const NewsCard = ({ item, classNames }: IProps) => {
     const time = useRelativeTime(item.date);
     return (
         <Link
             href={item.slug}
-            className="news-wrapper flex lg:flex-col flex-row md:w-full  w-full bg-white rounded-2xl shadow-sm hover:-translate-y-3 transition-transform duration-500 ease-in-out hover:hover:shadow-lg/20 transition-shadow duration-300 ease-in-out cursor-pointer"
+            className="news-wrapper flex lg:flex-col flex-row md:w-full w-full bg-white rounded-2xl shadow-sm hover:-translate-y-3 transition-transform duration-500 ease-in-out hover:hover:shadow-lg/20 transition-shadow duration-300 ease-in-out cursor-pointer"
         >
             <div className="thumbnail lg:w-full w-50 rounded-2xl shadow-sm">
                 <Image

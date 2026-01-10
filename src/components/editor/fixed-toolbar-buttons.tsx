@@ -16,13 +16,10 @@ import { useEditorReadOnly, useEditorRef } from 'platejs/react';
 // import { serializeMd } from '@platejs/markdown'; // REMOVED
 // import { remark } from 'remark'; // REMOVED
 // import remarkHtml from 'remark-html'; // REMOVED
-import { toast } from 'sonner';
 // import { serializeHtml } from 'platejs/static'; // REMOVED
 
 import { Button } from '@/components/editor/button';
 
-import { Base64 } from 'js-base64';
-import { serializeHtml } from 'platejs/static';
 import { AlignToolbarButton } from './align-toolbar-button';
 import { CommentToolbarButton } from './comment-toolbar-button';
 import { BaseEditorKit } from './editor-base-kit';
@@ -55,33 +52,32 @@ export function FixedToolbarButtons() {
                 plugins: BaseEditorKit,
                 value: editor.children,
             });
+            console.log(editSlate.children[0].children[0].text);
 
-            const parseHtml = await serializeHtml(editSlate);
-            console.log(parseHtml);
+            // const parseHtml = await serializeHtml(editSlate);
 
-            const encodeParseHtml = Base64.encode(parseHtml);
-            console.log(Base64.decode(encodeParseHtml));
+            // const encodeParseHtml = Base64.encode(parseHtml);
 
-            try {
-                const response = await fetch('http://localhost:3001/posts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ content: encodeParseHtml }),
-                });
+            // try {
+            //     const response = await fetch(`${URL_CONFIG.api}/posts`, {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({ content: encodeParseHtml }),
+            //     });
 
-                if (!response.ok) {
-                    throw new Error('Failed to save post');
-                }
+            //     if (!response.ok) {
+            //         throw new Error('Failed to save post');
+            //     }
 
-                const result = await response.json();
-                toast.success(`Post saved successfully! ID: ${result.id}`);
-                console.log('Saved post:', result);
-            } catch (error: any) {
-                toast.error(`Error saving post: ${error.message}`);
-                console.error('Error saving post:', error);
-            }
+            //     const result = await response.json();
+            //     toast.success(`Post saved successfully! ID: ${result.id}`);
+            //     console.log('Saved post:', result);
+            // } catch (error: any) {
+            //     toast.error(`Error saving post: ${error.message}`);
+            //     console.error('Error saving post:', error);
+            // }
         }
     };
 

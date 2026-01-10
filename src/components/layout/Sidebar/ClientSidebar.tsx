@@ -2,15 +2,7 @@
 
 import Search from '@/components/ui/Search/Search';
 import { PATH_CONFIG } from '@/configs/path-config';
-import {
-    IconBriefcase,
-    IconChevronCompactDown,
-    IconDeviceSim,
-    IconDeviceTv,
-    IconNews,
-    IconPhoneRinging,
-    IconWorld,
-} from '@tabler/icons-react';
+import { IconDeviceSim, IconDeviceTv, IconHome, IconNews, IconPhoneRinging, IconWorld } from '@tabler/icons-react';
 import Link from 'next/link';
 
 export default function ClientSidebar({ isOpen, onClose }: any) {
@@ -34,7 +26,21 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
 
                 <nav className="flex flex-col gap-4 text-lg font-medium">
                     <ul>
-                        <li className="p-4">
+                        <li className="p-4 ">
+                            <Link
+                                href={PATH_CONFIG.trangChu}
+                                className="gap-2 flex items-center justify-between align-center"
+                                onClick={onClose}
+                            >
+                                <div className="menu-item w-[80%] flex align-center gap-2">
+                                    <div className="icon text-white">
+                                        <IconHome width={'2rem'} height={'2rem'} />
+                                    </div>
+                                    <div className="title text-white">TRANG CHỦ</div>
+                                </div>
+                            </Link>
+                        </li>
+                        <li className="p-4 border-t-2 border-white">
                             <Link
                                 href={PATH_CONFIG.internet}
                                 className="gap-2 flex items-center justify-between align-center"
@@ -46,12 +52,13 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                                     </div>
                                     <div className="title text-white">INTERNET</div>
                                 </div>
-                                <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} />
+
+                                {/* <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} /> */}
                             </Link>
                         </li>
                         <li className="p-4 border-t-2 border-white">
                             <Link
-                                href={PATH_CONFIG.tivi}
+                                href={PATH_CONFIG.truyenHinh}
                                 className="gap-2 flex items-center justify-between align-center"
                                 onClick={onClose}
                             >
@@ -59,14 +66,15 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                                     <div className="icon text-white">
                                         <IconDeviceTv width={'2rem'} height={'2rem'} />
                                     </div>
-                                    <div className="title text-white">TIVI</div>
+                                    <div className="title text-white">TRUYỀN HÌNH</div>
                                 </div>
-                                <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} />
+
+                                {/* <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} /> */}
                             </Link>
                         </li>
                         <li className="p-4 border-t-2 border-white">
                             <Link
-                                href={PATH_CONFIG['smart-phone']}
+                                href={PATH_CONFIG.diDong}
                                 className="gap-2 flex items-center justify-between align-center"
                                 onClick={onClose}
                             >
@@ -76,26 +84,14 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                                     </div>
                                     <div className="title text-white">DI ĐỘNG</div>
                                 </div>
-                                <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} />
+
+                                {/* <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} /> */}
                             </Link>
                         </li>
+
                         <li className="p-4 border-t-2 border-white">
                             <Link
-                                href={PATH_CONFIG.business}
-                                className="gap-2 flex items-center justify-between align-center"
-                                onClick={onClose}
-                            >
-                                <div className="menu-item w-[80%] flex align-center gap-2">
-                                    <div className="icon text-white">
-                                        <IconBriefcase width={'2rem'} height={'2rem'} />
-                                    </div>
-                                    <div className="title text-white">DOANH NGHIỆP</div>
-                                </div>
-                            </Link>
-                        </li>
-                        <li className="p-4 border-t-2 border-white">
-                            <Link
-                                href={PATH_CONFIG['news-paper']}
+                                href={PATH_CONFIG.tinTuc}
                                 className="gap-2 flex items-center justify-between align-center"
                                 onClick={onClose}
                             >
@@ -105,12 +101,13 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                                     </div>
                                     <div className="title text-white">TIN TỨC</div>
                                 </div>
-                                <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} />
+
+                                {/* <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} /> */}
                             </Link>
                         </li>
                         <li className="p-4 border-t-2 border-white">
                             <Link
-                                href={PATH_CONFIG.contact}
+                                href={PATH_CONFIG.lineHe}
                                 className="gap-2 flex items-center justify-between align-center"
                                 onClick={onClose}
                             >
@@ -120,7 +117,8 @@ export default function ClientSidebar({ isOpen, onClose }: any) {
                                     </div>
                                     <div className="title text-white">LIÊN HỆ</div>
                                 </div>
-                                <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} />
+
+                                {/* <IconChevronCompactDown width={'1.5rem'} height={'1.5rem'} /> */}
                             </Link>
                         </li>
                     </ul>

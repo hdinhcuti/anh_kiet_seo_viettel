@@ -1,8 +1,6 @@
 'use client';
-import Button from '@/components/ui/Button/Button';
 import Tabs, { TabItem } from '@/components/ui/Tabs/Tabs';
 import { PackageCategory, PackageData } from '@/types/package';
-import { IconCircleChevronDown } from '@tabler/icons-react';
 import { useState } from 'react';
 import FeaturedPackagesCarousel from './FeaturedPackagesCarousel';
 
@@ -16,6 +14,7 @@ export default function FeaturedPackagesTabs({ data }: IProps) {
         { label: 'Camera', value: 'camera' },
         { label: 'Truyền hình', value: 'tivi' },
     ];
+
     return (
         <div className="flex flex-col justify-center ">
             <div className="flex justify-center pb-5">
@@ -26,13 +25,13 @@ export default function FeaturedPackagesTabs({ data }: IProps) {
                     <FeaturedPackagesCarousel items={data[selected]} />
                 </div>
 
-                <Button
+                {/* <Button
                     to={`/${selected}`}
                     active
                     rightIcon={<IconCircleChevronDown height={`1.5rem`} width={`1.5rem`} />}
                 >
                     Xem tất cả
-                </Button>
+                </Button> */}
             </div>
         </div>
     );

@@ -7,6 +7,7 @@
     --color-primary: rgb(195, 0, 42);
     --color-black: #333333;
     --color-gray: #666666;
+    --shadow-card: 0 0 18px rgba(0, 0, 0, 0.08);
 }
 @keyframes phoneRing {
     0% {
@@ -104,11 +105,90 @@ a[href] {
     --color-brand: var(--brand);
 }
 
-/* @layer base {
-  * {
-    @apply border-border outline-ring/50;
+.blog-content {
+    width: 100%;
+    max-width: 100%;
+}
+
+.blog-content img,
+.slate-img,
+[data-slate-node='element'] img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+.blog-content figure,
+[class*='slate'] figure {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.blog-content [style*='width'] {
+    max-width: 100% !important;
+}
+
+.blog-content,
+.plate-content {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.slate-table {
+    overflow-x: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Table */
+table {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse;
+    display: table !important;
+}
+
+td,
+th {
+    min-width: auto !important;
+    max-width: none !important;
+    width: auto !important;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.slate-td::before,
+.slate-th::before {
+    display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    td,
+    th {
+        padding: 0px;
+        font-size: 15px;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    .slate-table {
+        display: block;
+        overflow-x: auto;
     }
-} */
+}
+
+@media (max-width: 425px) {
+    td,
+    th {
+        padding: 0px;
+        font-size: 10px;
+    }
+
+    .slate-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

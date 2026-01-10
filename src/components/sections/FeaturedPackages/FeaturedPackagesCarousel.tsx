@@ -10,28 +10,24 @@ interface IProps {
     items: PackageItem[];
 }
 const FeaturedPackagesCarousel = ({ items, classNames }: IProps) => {
+    const lengthItems = items.length;
     return (
-        <div className={`lg:w-full md:w-[700px] min-w-[300px] rounded-2xl bg-gray-100 ${classNames}`}>
+        <div className={`lg:w-full w-full rounded-2xl ${classNames}`}>
             <Swiper
+                key={lengthItems}
                 breakpoints={{
-                    // Mobile
                     0: { slidesPerView: 1.2 },
-
-                    // Tablet
-                    640: { slidesPerView: 1.3 },
-
-                    // PC nhỏ
-                    768: { slidesPerView: 1.5 },
-
-                    // PC lớn
-                    1024: { slidesPerView: 3.2 },
+                    340: { slidesPerView: 1.5 },
+                    640: { slidesPerView: 2.2 },
+                    768: { slidesPerView: 2.2 },
+                    1024: { slidesPerView: lengthItems > 3 ? 3.2 : lengthItems },
                 }}
                 spaceBetween={5}
                 grabCursor={true}
-                className="carousel-product "
+                className="carousel-product h-full w-full"
             >
                 {items.map((value, index) => (
-                    <SwiperSlide key={index} className="!flex justify-center md:!p-5 !p-1 ">
+                    <SwiperSlide key={index} className="!flex justify-center items-center !py-5 !px-1 !h-full">
                         <ProductCard key={index} item={value} />
                     </SwiperSlide>
                 ))}

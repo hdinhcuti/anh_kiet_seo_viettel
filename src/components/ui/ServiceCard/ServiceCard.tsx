@@ -14,7 +14,7 @@ interface IProps {
 const ServiceCard = ({ item }: IProps) => {
     return (
         <Link
-            className="service-card-wrapper w-70 h-100 md:h-full md:w-120 rounded-2xl shadow-sm hover:-translate-y-3 transition-transform duration-500 ease-in-out hover:shadow-lg/20 transition-shadow duration-300 ease-in-out cursor-pointer "
+            className="service-card-wrapper bg-white w-70 h-full md:w-120 rounded-2xl shadow-sm hover:-translate-y-3 transition-transform duration-500 ease-in-out hover:shadow-lg/20 transition-shadow duration-300 ease-in-out cursor-pointer "
             href={item.slug}
         >
             <div className="image rounded-t-2xl overflow-hidden h-40 md:h-60">

@@ -1,3 +1,4 @@
+import { URL_CONFIG } from '@/configs/url-config';
 import { PackageItem } from '@/types/package';
 import { Base64 } from 'js-base64';
 import ClientInternet from './ClientInternet';
@@ -32,12 +33,51 @@ const Internet = async () => {
             price: '450.000',
         },
     ];
-    const res = await fetch(`http://localhost:3001/posts/1767721928252`, { cache: 'no-store' });
+    // const packagesData: PackageItem[] = [
+    //     {
+    //         id: 'cam_ai_1',
+    //         name: 'Camera AI Viettel 1',
+    //         thumbnail: cameraCard.src,
+    //         description: 'Camera AI thông minh, phát hiện chuyển động và cảnh báo.',
+    //         price: '199.000',
+    //     },
+    //     {
+    //         id: 'cam_ai_2',
+    //         name: 'Camera AI Viettel 2',
+    //         thumbnail: cameraCard.src,
+
+    //         description: 'Camera AI góc rộng, hỗ trợ quan sát toàn diện.',
+    //         price: '299.000',
+    //     },
+    //     {
+    //         id: 'cam_ai_2',
+    //         name: 'Camera AI Viettel 2',
+    //         thumbnail: cameraCard.src,
+
+    //         description: 'Camera AI góc rộng, hỗ trợ quan sát toàn diện.',
+    //         price: '299.000',
+    //     },
+    // ];
+    const res = await fetch(`${URL_CONFIG.api}/posts/1767794048353`, { cache: 'no-store' });
 
     const data = await res.json();
 
+    const titleService: string = 'DỊCH VỤ LẮP ĐẶT INTERNET VIETTEL';
+
+    const description: string = `Các gói cước dịch vụ internet Viettel đang phổ biến hiện nay. Trọn gói chỉ từ
+                                        180.000đ/tháng có ngay dịch vụ internet cáp quang siêu tốc, băng thông lên đến
+                                        1Gbps (Download = Upload), trang bị wifi 6 và tặng 1 tháng cước sử dụng miễn phí
+                                        khi đóng trước cước từ 12 tháng.`;
+
     const contentBlog = Base64.decode(data?.content);
-    return <ClientInternet packagesData={packagesData} contentBlog={contentBlog} />;
+    return (
+        <ClientInternet
+            titleService={titleService}
+            description={description}
+            packagesData={packagesData}
+            contentBlog={contentBlog}
+        />
+    );
 };
 
 export default Internet;

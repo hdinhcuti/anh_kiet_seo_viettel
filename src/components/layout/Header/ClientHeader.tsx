@@ -2,6 +2,7 @@
 import styles from '@/components/layout/Header/Header.module.scss';
 import { ContactIcon, PhoneIcon } from '@/components/ui/Icon/Icon';
 import Search from '@/components/ui/Search/Search';
+import { INFO_CONTACT } from '@/configs/info-contact-config';
 import { PATH_CONFIG } from '@/configs/path-config';
 import logo from '@public/logo/viettel-logo.svg';
 import { IconMenu2 } from '@tabler/icons-react';
@@ -19,7 +20,7 @@ export default function ClientHeader({ onOpenSidebar }: any) {
             </div>
             <div className={cx('logo')}>
                 <Link
-                    href={PATH_CONFIG.home}
+                    href={PATH_CONFIG.trangChu}
                     title="Tổng đài lắp đặt Internet Viettel - Lắp đặt Wifi Viettel, Internet Viettel, Truyền hình TV360 Viettel"
                 >
                     <Image className="object-cover" src={logo} alt="Viettel Logo" />
@@ -33,12 +34,12 @@ export default function ClientHeader({ onOpenSidebar }: any) {
             >
                 <ul className={cx('nav-list', 'flex flex-row gap-[1rem] text-base hidden md:flex')}>
                     <li className="text-gray-500 font-bold">
-                        <Link className="flex justify-center items-center gap-1 text-nowrap" href={PATH_CONFIG.contact}>
+                        <Link className="flex justify-center items-center gap-1 text-nowrap" href={PATH_CONFIG.lineHe}>
                             {<ContactIcon />} Liên hệ
                         </Link>
                     </li>
                     <li className="text-gray-500 font-bold">
-                        <Link className="flex justify-center items-center gap-1 text-nowrap" href={PATH_CONFIG.phone}>
+                        <Link className="flex justify-center items-center gap-1 text-nowrap" href={INFO_CONTACT.phone}>
                             {<PhoneIcon />} 0987654321
                         </Link>
                     </li>

@@ -1,3 +1,4 @@
+import { URL_CONFIG } from '@/configs/url-config';
 import * as React from 'react';
 
 import { toast } from 'sonner';
@@ -37,7 +38,7 @@ export function useUploadFile({ onUploadComplete, onUploadError, ...props }: Use
             formData.append('image', file); // Sử dụng key 'image' như API yêu cầu
 
             // Đây là URL API upload của bạn
-            const uploadUrl = 'http://localhost:3001/upload';
+            const uploadUrl = `${URL_CONFIG.api}/upload`;
 
             const response = await fetch(uploadUrl, {
                 method: 'POST',
