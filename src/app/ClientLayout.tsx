@@ -98,7 +98,7 @@ export default function ClientLayout({ children }: any) {
                         </div>
                     </a>
 
-                    <Link href={PATH_CONFIG.contact} className="relative flex items-center justify-center">
+                    <Link href={PATH_CONFIG.lineHe} className="relative flex items-center justify-center">
                         <span className="absolute w-12 h-12 rounded-full bg-primary opacity-50 animate-ping"></span>
                         <span className="absolute w-12 h-12 rounded-full bg-primary opacity-50 animate-ping"></span>
                         <div className="phone-btn w-12 h-12 rounded-full shadow-lg bg-primary flex items-center justify-center text-white">

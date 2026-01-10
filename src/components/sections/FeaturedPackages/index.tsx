@@ -1,6 +1,6 @@
 import { PackageData } from '@/types/package';
+import cameraCard from '@public/images/camera-card.webp';
 import FeaturedPackagesTabs from './FeaturedPackagesTabs';
-
 export default function FeaturedPackages() {
     const packagesData: PackageData = {
         internet: [
@@ -9,21 +9,28 @@ export default function FeaturedPackages() {
                 name: 'Gói GIGA2_H',
                 speed: '150 Mbps',
                 description: 'Gói cước Internet tốc độ cao dành cho hộ gia đình.',
-                price: '355.000',
+                price: '355.000 / Tháng',
             },
             {
                 id: 'giga3_h',
                 name: 'Gói GIGA3_H',
                 speed: '200 Mbps',
                 description: 'Gói cước Internet nâng cao cho nhu cầu sử dụng lớn.',
-                price: '390.000',
+                price: '390.000 / Tháng',
             },
             {
                 id: 'sup500_h',
                 name: 'Gói SUP500_H',
                 speed: '500 Mbps',
                 description: 'Internet siêu tốc, phù hợp hộ gia đình sử dụng nhiều thiết bị.',
-                price: '450.000',
+                price: '450.000 / Tháng',
+            },
+            {
+                id: 'sup600_h',
+                name: 'Gói SUP500_H',
+                speed: '500 Mbps',
+                description: 'Internet siêu tốc, phù hợp hộ gia đình sử dụng nhiều thiết bị.',
+                price: '450.000 / Tháng',
             },
         ],
 
@@ -31,14 +38,23 @@ export default function FeaturedPackages() {
             {
                 id: 'cam_ai_1',
                 name: 'Camera AI Viettel 1',
-                speed: '—',
+                thumbnail: cameraCard.src,
                 description: 'Camera AI thông minh, phát hiện chuyển động và cảnh báo.',
                 price: '199.000',
             },
             {
                 id: 'cam_ai_2',
                 name: 'Camera AI Viettel 2',
-                speed: '—',
+                thumbnail: cameraCard.src,
+
+                description: 'Camera AI góc rộng, hỗ trợ quan sát toàn diện.',
+                price: '299.000',
+            },
+            {
+                id: 'cam_ai_3',
+                name: 'Camera AI Viettel 3',
+                thumbnail: cameraCard.src,
+
                 description: 'Camera AI góc rộng, hỗ trợ quan sát toàn diện.',
                 price: '299.000',
             },
@@ -62,7 +78,7 @@ export default function FeaturedPackages() {
         ],
     };
     return (
-        <section className="bg-gray-100">
+        <section className="bg-white">
             <h2 className="sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold mb-4 text-black py-5">
                 SẢN PHẨM NỔI BẬT
             </h2>

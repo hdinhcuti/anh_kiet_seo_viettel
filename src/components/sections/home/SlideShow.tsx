@@ -26,7 +26,13 @@ export default function HeroSlider() {
                 {[slideShowImg1, slideShowImg2].map((img, i) => (
                     <SwiperSlide key={i}>
                         <Link href="#">
-                            <Image src={img} alt={`Slide ${i + 1}`} className="w-full h-full object-cover" />
+                            <Image
+                                src={img}
+                                alt={`Slide ${i + 1}`}
+                                className="w-full h-full object-cover"
+                                priority
+                                loading="eager"
+                            />
                         </Link>
                     </SwiperSlide>
                 ))}

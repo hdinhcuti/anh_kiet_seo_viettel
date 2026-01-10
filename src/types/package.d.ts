@@ -3,7 +3,8 @@ type PackageCategory = 'internet' | 'camera' | 'tivi';
 export interface PackageItem {
     id: string;
     name: string;
-    speed: string;
+    speed?: string;
+    thumbnail?: string;
     description: string;
     price: string;
 }

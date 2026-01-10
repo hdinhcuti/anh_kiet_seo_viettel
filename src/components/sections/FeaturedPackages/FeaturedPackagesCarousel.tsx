@@ -6,32 +6,29 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 interface IProps {
+    classNames?: string;
     items: PackageItem[];
 }
-const FeaturedPackagesCarousel = ({ items }: IProps) => {
+const FeaturedPackagesCarousel = ({ items, classNames }: IProps) => {
+    const lengthItems = items.length;
     return (
-        <div className="lg:w-full md:w-[700px] min-w-[300px] bg-gray-100">
+        <div className={`lg:w-full w-full rounded-2xl ${classNames}`}>
             <Swiper
+                key={lengthItems}
                 breakpoints={{
-                    // Mobile
                     0: { slidesPerView: 1.2 },
-
-                    // Tablet
-                    640: { slidesPerView: 1.3 },
-
-                    // PC nhỏ
-                    768: { slidesPerView: 1.8 },
-
-                    // PC lớn
-                    1024: { slidesPerView: 3 },
+                    340: { slidesPerView: 1.5 },
+                    640: { slidesPerView: 2.2 },
+                    768: { slidesPerView: 2.2 },
+                    1024: { slidesPerView: lengthItems > 3 ? 3.2 : lengthItems },
                 }}
                 spaceBetween={5}
                 grabCursor={true}
-                className="carousel-product "
+                className="carousel-product h-full w-full"
             >
-                {items.map((value) => (
-                    <SwiperSlide key={value.id} className="!flex justify-center !p-5 ">
-                        <ProductCard item={value} />
+                {items.map((value, index) => (
+                    <SwiperSlide key={index} className="!flex justify-center items-center !py-5 !px-1 !h-full">
+                        <ProductCard key={index} item={value} />
                     </SwiperSlide>
                 ))}
             </Swiper>

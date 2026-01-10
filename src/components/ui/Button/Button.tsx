@@ -1,6 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
+import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -9,8 +10,10 @@ import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
 export interface ButtonProps {
-    icon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    leftIcon?: React.ReactNode;
     children?: React.ReactNode;
+    loading?: boolean;
     href?: string; // Link or <a>
     to?: string; // open external link
     className?: string;
@@ -26,8 +29,10 @@ export interface ButtonProps {
 }
 
 export default function Button({
-    icon,
+    rightIcon,
+    leftIcon,
     children,
+    loading,
     href,
     to,
     className,
@@ -62,8 +67,19 @@ export default function Button({
     if (to) {
         return (
             <Link href={to} className={classes}>
-                {icon && <div className={cx('icon')}>{icon}</div>}
-                <div className={cx('title')}>{children}</div>
+                {loading ? (
+                    <Loader2
+                        className={`animate-spin w-7 h-7 transition-colors ${
+                            primary ? 'text-white group-hover:text-primary' : 'text-primary group-hover:text-white'
+                        }`}
+                    />
+                ) : (
+                    <>
+                        {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
+                        <div className={cx('title')}>{children}</div>
+                        {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
+                    </>
+                )}
             </Link>
         );
     }
@@ -71,16 +87,38 @@ export default function Button({
     if (href) {
         return (
             <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
-                {icon && <div className={cx('icon')}>{icon}</div>}
-                <div className={cx('title')}>{children}</div>
+                {loading ? (
+                    <Loader2
+                        className={`animate-spin w-7 h-7 transition-colors ${
+                            primary ? 'text-white group-hover:text-primary' : 'text-primary group-hover:text-white'
+                        }`}
+                    />
+                ) : (
+                    <>
+                        {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
+                        <div className={cx('title')}>{children}</div>
+                        {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
+                    </>
+                )}
             </a>
         );
     }
 
     return (
         <button onClick={onClick} className={classes}>
-            {icon && <div className={cx('icon')}>{icon}</div>}
-            <div className={cx('title')}>{children}</div>
+            {loading ? (
+                <Loader2
+                    className={`animate-spin w-7 h-7 transition-colors ${
+                        primary ? 'text-white group-hover:text-primary' : 'text-primary group-hover:text-white'
+                    }`}
+                />
+            ) : (
+                <>
+                    {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
+                    <div className={cx('title')}>{children}</div>
+                    {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
+                </>
+            )}
         </button>
     );
 }

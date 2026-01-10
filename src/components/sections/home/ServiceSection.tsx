@@ -7,7 +7,6 @@ import truyenHinh from '@public/images/truyen-hinh.webp';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function ServiceSection() {
@@ -58,14 +57,7 @@ export default function ServiceSection() {
 
             <div className="w-full flex sm:hidden justify-center pt-10">
                 <div className=" max-w-[900px] w-full">
-                    <Swiper
-                        modules={[Autoplay, Navigation, Pagination]}
-                        slidesPerView={1.2}
-                        spaceBetween={5}
-                        autoplay={{ delay: 30000 }}
-                        navigation
-                        pagination={false}
-                    >
+                    <Swiper slidesPerView={1.2} spaceBetween={5} autoplay={{ delay: 3000 }} pagination={false}>
                         {serviceCards.map((value, index) => {
                             return (
                                 <SwiperSlide key={index} className="!flex justify-center !p-5">
