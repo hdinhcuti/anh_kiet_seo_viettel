@@ -8,7 +8,7 @@ interface ClientTinTucProps {
 const ClientTinTuc = ({ titleService, newsData }: ClientTinTucProps) => {
     return (
         <>
-            <BlogPost title={titleService} contentBlog={newsData} />
+            <BlogPost titleService={titleService} contentBlog={newsData} />
         </>
     );
 };

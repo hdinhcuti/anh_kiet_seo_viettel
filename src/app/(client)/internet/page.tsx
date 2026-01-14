@@ -70,8 +70,11 @@ const Internet = async () => {
                                         khi đóng trước cước từ 12 tháng.`;
 
     const contentBlog = Base64.decode(data?.content);
+
+    const titleBlog: string = 'Khuyến mãi đăng ký lắp đặt internet Viettel Tp Cần Thơ tháng 01/2026';
     return (
         <ClientInternet
+            titleBlog={titleBlog}
             titleService={titleService}
             description={description}
             packagesData={packagesData}
