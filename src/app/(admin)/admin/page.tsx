@@ -48,12 +48,12 @@ const menuItems: MenuItem[] = [
         href: '/quan-ly-bai-viet',
         icon: <FileText size={20} />,
         children: [
-            { title: 'Bài viết Internet', href: '/quan-ly-bai-viet/internet', icon: <Wifi size={16} /> },
-            { title: 'Bài viết Truyền hình', href: '/quan-ly-bai-viet/truyen-hinh', icon: <Tv size={16} /> },
-            { title: 'Bài viết Di động', href: '/quan-ly-bai-viet/di-dong', icon: <Smartphone size={16} /> },
-            { title: 'Bài viết Camera', href: '/quan-ly-bai-viet/camera', icon: <Camera size={16} /> },
+            { title: 'Bài viết - Internet', href: '/quan-ly-bai-viet/internet', icon: <Wifi size={16} /> },
+            { title: 'Bài viết - Truyền hình', href: '/quan-ly-bai-viet/truyen-hinh', icon: <Tv size={16} /> },
+            { title: 'Bài viết - Di động', href: '/quan-ly-bai-viet/di-dong', icon: <Smartphone size={16} /> },
+            { title: 'Bài viết - Camera', href: '/quan-ly-bai-viet/camera', icon: <Camera size={16} /> },
             {
-                title: 'Bài viết dịch vụ trả sau',
+                title: 'Bài viết - dịch vụ trả sau',
                 href: '/quan-ly-bai-viet/dich-vu-tra-sau',
                 icon: <Smartphone size={16} />,
             },
@@ -69,17 +69,20 @@ const menuItems: MenuItem[] = [
 export default function AdminLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [openMenus, setOpenMenus] = useState<string[]>(['/admin/quan-ly-goi-cuoc']);
-    const [activePage, setActivePage] = useState('/dashboard');
+    const [activePage, setActivePage] = useState({
+        title: 'Dashboard',
+        href: '/dashboard',
+    });
     const [showUserMenu, setShowUserMenu] = useState(false);
 
     const toggleMenu = (href: string) => {
         setOpenMenus((prev) => (prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href]));
     };
 
-    const isActive = (href: string) => activePage === href;
-    const isParentActive = (href: string) => activePage.startsWith(href);
+    const isActive = (href: string) => activePage.href === href;
+    const isParentActive = (href: string) => activePage.href.startsWith(href);
     const renderContent = () => {
-        switch (activePage) {
+        switch (activePage.href) {
             case '/dashboard':
                 return <div>Dashboard</div>;
             case '/quan-ly-danh-muc':
@@ -123,7 +126,7 @@ export default function AdminLayout() {
                                 sidebarOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
                             }`}
                         >
-                            <h1 className="text-lg font-bold text-gray-900 whitespace-nowrap">AdminHub</h1>
+                            <h1 className="text-lg font-bold text-gray-900 whitespace-nowrap">Admin</h1>
                             <p className="text-xs text-gray-500 whitespace-nowrap">Quản trị hệ thống</p>
                         </div>
                     </div>
@@ -140,7 +143,7 @@ export default function AdminLayout() {
                     {menuItems.map((item) => (
                         <div key={item.href}>
                             <div
-                                onClick={() => (item.children ? toggleMenu(item.href) : setActivePage(item.href))}
+                                onClick={() => (item.children ? toggleMenu(item.href) : setActivePage(item))}
                                 className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
                                     isParentActive(item.href)
                                         ? 'bg-blue-50 text-blue-700'
@@ -172,7 +175,7 @@ export default function AdminLayout() {
                                     {item.children.map((child) => (
                                         <div
                                             key={child.href}
-                                            onClick={() => setActivePage(child.href)}
+                                            onClick={() => setActivePage(child)}
                                             className={`flex items-center space-x-3 p-2 rounded-lg cursor-pointer text-sm ${
                                                 isActive(child.href)
                                                     ? 'bg-blue-50 text-blue-700'
@@ -200,7 +203,7 @@ export default function AdminLayout() {
                     >
                         <Menu size={20} />
                     </button>
-                    <h2 className="ml-4 text-lg font-bold text-gray-900">Admin</h2>
+                    <h2 className="ml-4 text-lg font-bold text-gray-900">{activePage.title}</h2>
                 </header>
 
                 {/* Content */}
