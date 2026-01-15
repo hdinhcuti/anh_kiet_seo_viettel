@@ -3,10 +3,10 @@
 import {
     Camera,
     ChevronDown,
+    Contact,
     FileText,
     LayoutDashboard,
     Menu,
-    MessageSquare,
     Newspaper,
     Package,
     Smartphone,
@@ -25,46 +25,51 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
     {
         title: 'Dashboard',
-        href: '/admin/dashboard',
+        href: '/dashboard',
         icon: <LayoutDashboard size={20} />,
     },
     {
-        title: 'Quản lý gói cước',
-        href: '/admin/quan-ly-goi-cuoc',
+        title: 'Quản lý danh mục',
+        href: '/quan-ly-danh-muc',
         icon: <Package size={20} />,
-        children: [
-            { title: 'Loại gói cước', href: '/admin/quan-ly-goi-cuoc/loai-goi-cuoc', icon: <Package size={16} /> },
-            { title: 'Gói Internet', href: '/admin/quan-ly-goi-cuoc/internet', icon: <Wifi size={16} /> },
-            { title: 'Gói Camera', href: '/admin/quan-ly-goi-cuoc/camera', icon: <Camera size={16} /> },
-            { title: 'Gói Truyền hình', href: '/admin/quan-ly-goi-cuoc/truyen-hinh', icon: <Tv size={16} /> },
-        ],
+    },
+    {
+        title: 'Quản lý sản phẩm',
+        href: '/quan-ly-san-pham',
+        icon: <Package size={20} />,
     },
     {
         title: 'Quản lý tin tức',
-        href: '/admin/quan-ly-tin-tuc',
+        href: '/quan-ly-tin-tuc',
         icon: <Newspaper size={20} />,
     },
     {
         title: 'Quản lý bài viết',
-        href: '/admin/quan-ly-bai-viet',
+        href: '/quan-ly-bai-viet',
         icon: <FileText size={20} />,
         children: [
-            { title: 'Bài viết Internet', href: '/admin/quan-ly-bai-viet/internet', icon: <Wifi size={16} /> },
-            { title: 'Bài viết Truyền hình', href: '/admin/quan-ly-bai-viet/truyen-hinh', icon: <Tv size={16} /> },
-            { title: 'Bài viết Di động', href: '/admin/quan-ly-bai-viet/di-dong', icon: <Smartphone size={16} /> },
+            { title: 'Bài viết Internet', href: '/quan-ly-bai-viet/internet', icon: <Wifi size={16} /> },
+            { title: 'Bài viết Truyền hình', href: '/quan-ly-bai-viet/truyen-hinh', icon: <Tv size={16} /> },
+            { title: 'Bài viết Di động', href: '/quan-ly-bai-viet/di-dong', icon: <Smartphone size={16} /> },
+            { title: 'Bài viết Camera', href: '/quan-ly-bai-viet/camera', icon: <Camera size={16} /> },
+            {
+                title: 'Bài viết dịch vụ trả sau',
+                href: '/quan-ly-bai-viet/dich-vu-tra-sau',
+                icon: <Smartphone size={16} />,
+            },
         ],
     },
     {
         title: 'Quản lý liên hệ',
-        href: '/admin/quan-ly-lien-he',
-        icon: <MessageSquare size={20} />,
+        href: '/quan-ly-lien-he',
+        icon: <Contact size={20} />,
     },
 ];
 
 export default function AdminLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [openMenus, setOpenMenus] = useState<string[]>(['/admin/quan-ly-goi-cuoc']);
-    const [activePage, setActivePage] = useState('/admin/quan-ly-goi-cuoc/loai-goi-cuoc');
+    const [activePage, setActivePage] = useState('/dashboard');
     const [showUserMenu, setShowUserMenu] = useState(false);
 
     const toggleMenu = (href: string) => {
@@ -73,7 +78,24 @@ export default function AdminLayout() {
 
     const isActive = (href: string) => activePage === href;
     const isParentActive = (href: string) => activePage.startsWith(href);
-
+    const renderContent = () => {
+        switch (activePage) {
+            case '/dashboard':
+                return <div>Dashboard</div>;
+            case '/quan-ly-danh-muc':
+                return <div>Quản lý danh mục</div>;
+            case '/quan-ly-san-pham':
+                return <div>Quản lý sản phẩm</div>;
+            case '/quan-ly-tin-tuc':
+                return <div>Quản lý tin tức</div>;
+            case '/quan-ly-bai-viet':
+                return <div>Quản lý bài viết</div>;
+            case '/quan-ly-bai-viet/internet':
+                return <div>Quản lý bài viết - internet</div>;
+            case '/quan-ly-lien-he':
+                return <div>Quản lý liên hệ</div>;
+        }
+    };
     return (
         <div className="flex h-screen bg-gray-50 overflow-hidden">
             {/* Overlay mobile */}
@@ -183,7 +205,7 @@ export default function AdminLayout() {
 
                 {/* Content */}
                 <main className="flex-1 overflow-y-auto p-8">
-                    <div className="bg-white rounded-xl border p-12 text-center text-gray-500">Nội dung trang</div>
+                    <div className="">{renderContent()}</div>
                 </main>
             </div>
         </div>
