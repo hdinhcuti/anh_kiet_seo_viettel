@@ -1,4 +1,4 @@
-import styles from '@/components/layout/(client)/Footer/Footer.module.scss';
+import styles from '@/components/layout/client/Footer/Footer.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);

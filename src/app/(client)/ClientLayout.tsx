@@ -1,9 +1,9 @@
 'use client';
 
-import HeaderGroup from '@/components/layout/(client)/Header/HeaderGroup';
+import HeaderGroup from '@/components/layout/client/Header/HeaderGroup';
 // import HeaderGroup from '@/components/layout/Header/HeaderGroup';
 // import Footer from '@/components/layout/Footer/Footer';
-import Sidebar from '@/components/layout/(client)/Sidebar/Sidebar';
+import Sidebar from '@/components/layout/client/Sidebar/Sidebar';
 import { PATH_CONFIG } from '@/configs/path-config';
 import phoneCall from '@public/logo/phone-call.svg';
 import zaloLogo from '@public/logo/zalo-logo.svg';

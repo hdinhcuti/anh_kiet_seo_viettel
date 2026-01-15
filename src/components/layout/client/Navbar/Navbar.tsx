@@ -1,4 +1,4 @@
-import styles from '@/components/layout/(client)/Navbar/Navbar.module.scss';
+import styles from '@/components/layout/client/Navbar/Navbar.module.scss';
 import { PATH_CONFIG } from '@/configs/path-config';
 import { IconDeviceSim, IconDeviceTv, IconHome, IconNews, IconPhoneRinging, IconWorld } from '@tabler/icons-react';
 import classNames from 'classnames/bind';
