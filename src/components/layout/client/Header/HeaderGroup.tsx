@@ -1,7 +1,7 @@
 'use client';
 
-import Header from '@/components/layout/Header/Header';
-import Navbar from '@/components/layout/Navbar/Navbar';
+import Header from '@/components/layout/client/Header/Header';
+import Navbar from '@/components/layout/client/Navbar/Navbar';
 import { forwardRef, useEffect, useState } from 'react';
 
 const HeaderGroup = forwardRef<HTMLDivElement, { onOpenSidebar: () => void }>(({ onOpenSidebar }, ref) => {

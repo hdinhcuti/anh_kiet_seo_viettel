@@ -1,5 +1,5 @@
 'use client';
-import styles from '@/components/layout/Header/Header.module.scss';
+import styles from '@/components/layout/client/Header/Header.module.scss';
 import { ContactIcon, PhoneIcon } from '@/components/ui/Icon/Icon';
 import Search from '@/components/ui/Search/Search';
 import { INFO_CONTACT } from '@/configs/info-contact-config';

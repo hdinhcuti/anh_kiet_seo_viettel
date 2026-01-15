@@ -4,12 +4,13 @@ import { PackageItem } from '@/types/package';
 import NewsCard from '../NewsCard/NewsCard';
 
 interface BlogPostProps {
-    title: string;
+    titleService: string;
     description?: string;
     packagesData?: PackageItem[];
+    titleBlog?: string;
     contentBlog: string | NewsSummary[];
 }
-function BlogPost({ title, description, packagesData, contentBlog }: BlogPostProps) {
+function BlogPost({ titleService, description, packagesData, titleBlog, contentBlog }: BlogPostProps) {
     return (
         <div className="w-full mx-auto flex flex-col bg-white h-full">
             {packagesData && (
@@ -39,15 +40,16 @@ function BlogPost({ title, description, packagesData, contentBlog }: BlogPostPro
                     <div className="hidden md:block flex-grow h-px bg-primary/50"></div>
 
                     <span className="md:px-4 text-primary font-bold text-md md:text-3xl uppercase text-center mx-auto text-center">
-                        <h1 className="text-primary font-bold text-md md:text-2xl ">{title}</h1>
+                        <span className="text-primary font-bold text-md md:text-2xl ">{titleService}</span>
                     </span>
 
                     <div className="hidden md:block flex-grow h-px bg-primary/50"></div>
                 </div>
             </div>
             <div className="max-w-[1300px] w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 py-5 px-2 md:border-t md:border-transparent border-t border-red-200">
-                <div className="lg:border-r  border-gray/10 lg:pr-6 h-full ">
+                <div className="lg:border-r border-gray/10 lg:pr-6 h-full ">
                     <div className="content w-full">
+                        <h1 className="mb-5 font-bold md:text-2xl text-md md:text-start text-center">{titleBlog}</h1>
                         {typeof contentBlog === 'string' && (
                             <article className="blog-content" dangerouslySetInnerHTML={{ __html: contentBlog }} />
                         )}
