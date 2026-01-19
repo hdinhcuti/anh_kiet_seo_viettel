@@ -1,13 +1,9 @@
 'use client';
 
-import classNames from 'classnames/bind';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import styles from './Button.module.scss';
-
-const cx = classNames.bind(styles);
 
 export interface ButtonProps {
     rightIcon?: React.ReactNode;
@@ -16,6 +12,7 @@ export interface ButtonProps {
     loading?: boolean;
     href?: string; // Link or <a>
     to?: string; // open external link
+    type?: 'button' | 'submit' | 'reset' | undefined;
     className?: string;
     primary?: boolean;
     search?: boolean;
@@ -35,6 +32,7 @@ export default function Button({
     loading,
     href,
     to,
+    type,
     className,
     primary,
     search,
@@ -49,37 +47,48 @@ export default function Button({
     const pathname = usePathname();
     const isActive = href === pathname;
 
-    const classes = cx(
-        'button-container',
-        {
-            primary,
-            search,
-            login,
-            medium,
-            small,
-            resize,
-            hover,
-            active: isActive || active,
-        },
-        className,
-    );
+    const baseClasses =
+        'inline-flex items-center justify-center gap-1.5 px-4 py-1.5 h-10 rounded-[10px] border-2 border-primary bg-transparent cursor-pointer transition-all duration-[350ms] ease-in-out';
+
+    const hoverClasses = hover ? 'hover:bg-primary border border-primary' : '';
+    const activeClasses = isActive || active ? 'bg-primary ' : '';
+
+    const iconBaseClasses = 'flex items-center transition-all duration-[350ms] ease-in-out';
+    const iconColorClasses = isActive || active ? 'text-white' : 'text-primary';
+    const iconHoverClasses = hover ? 'group-hover:text-white' : '';
+
+    const titleBaseClasses = 'font-medium whitespace-nowrap transition-all duration-[350ms] ease-in-out';
+    const titleColorClasses = isActive || active ? 'text-white' : 'text-primary';
+    const titleHoverClasses = hover ? 'group-hover:text-white' : '';
+
+    const classes = `${baseClasses} ${hoverClasses} ${activeClasses} group ${className || ''}`.trim();
+
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <div className={`${iconBaseClasses} ${iconColorClasses} ${iconHoverClasses}`}>
+                    <Loader2 className="animate-spin w-7 h-7" />
+                </div>
+            );
+        }
+
+        return (
+            <>
+                {rightIcon && (
+                    <div className={`${iconBaseClasses} ${iconColorClasses} ${iconHoverClasses}`}>{rightIcon}</div>
+                )}
+                <div className={`${titleBaseClasses} ${titleColorClasses} ${titleHoverClasses}`}>{children}</div>
+                {leftIcon && (
+                    <div className={`${iconBaseClasses} ${iconColorClasses} ${iconHoverClasses}`}>{leftIcon}</div>
+                )}
+            </>
+        );
+    };
 
     if (to) {
         return (
             <Link href={to} className={classes}>
-                {loading ? (
-                    <Loader2
-                        className={`animate-spin w-7 h-7 transition-colors ${
-                            primary ? 'text-white group-hover:text-primary' : 'text-primary group-hover:text-white'
-                        }`}
-                    />
-                ) : (
-                    <>
-                        {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
-                        <div className={cx('title')}>{children}</div>
-                        {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
-                    </>
-                )}
+                {renderContent()}
             </Link>
         );
     }
@@ -87,38 +96,14 @@ export default function Button({
     if (href) {
         return (
             <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
-                {loading ? (
-                    <Loader2
-                        className={`animate-spin w-7 h-7 transition-colors ${
-                            primary ? 'text-white group-hover:text-primary' : 'text-primary group-hover:text-white'
-                        }`}
-                    />
-                ) : (
-                    <>
-                        {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
-                        <div className={cx('title')}>{children}</div>
-                        {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
-                    </>
-                )}
+                {renderContent()}
             </a>
         );
     }
 
     return (
-        <button onClick={onClick} className={classes}>
-            {loading ? (
-                <Loader2
-                    className={`animate-spin w-7 h-7 transition-colors ${
-                        primary ? 'text-white group-hover:text-primary' : 'text-primary group-hover:text-white'
-                    }`}
-                />
-            ) : (
-                <>
-                    {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
-                    <div className={cx('title')}>{children}</div>
-                    {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
-                </>
-            )}
+        <button type={type} onClick={onClick} className={classes}>
+            {renderContent()}
         </button>
     );
 }

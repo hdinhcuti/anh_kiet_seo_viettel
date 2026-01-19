@@ -5,6 +5,7 @@ import ClientChiTietTinTuc from './ClientTinTuc';
 const ChiTietTinTuc = async ({ params }: { params: { slug: string } }) => {
     //1767794048353
     const { slug } = await params;
+    console.log(URL_CONFIG.api);
 
     const res = await fetch(`${URL_CONFIG.api}/posts/${slug}`, { cache: 'no-store' });
 

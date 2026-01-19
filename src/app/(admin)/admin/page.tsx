@@ -1,5 +1,6 @@
 'use client';
 
+import ManagerCategory from '@/components/admin/ManageCategory/ManageCategory';
 import {
     Camera,
     ChevronDown,
@@ -86,7 +87,11 @@ export default function AdminLayout() {
             case '/dashboard':
                 return <div>Dashboard</div>;
             case '/quan-ly-danh-muc':
-                return <div>Quản lý danh mục</div>;
+                return (
+                    <div className="w-full">
+                        <ManagerCategory />
+                    </div>
+                );
             case '/quan-ly-san-pham':
                 return <div>Quản lý sản phẩm</div>;
             case '/quan-ly-tin-tuc':
@@ -101,15 +106,13 @@ export default function AdminLayout() {
     };
     return (
         <div className="flex h-screen bg-gray-50 overflow-hidden">
-            {/* Overlay mobile */}
             {sidebarOpen && (
                 <div className="fixed inset-0 bg-black/40 z-40 md:hidden" onClick={() => setSidebarOpen(false)} />
             )}
 
-            {/* Sidebar */}
             <aside
                 className={`
-                    fixed md:static inset-y-0 left-0 z-50
+                    fixed md:static inset-y-0 left-0 z-40
                     bg-white border-r border-gray-200
                     transition-all duration-300 ease-in-out
                     flex flex-col
@@ -207,8 +210,8 @@ export default function AdminLayout() {
                 </header>
 
                 {/* Content */}
-                <main className="flex-1 overflow-y-auto p-8">
-                    <div className="">{renderContent()}</div>
+                <main className="flex-1 overflow-y-auto">
+                    <div className="w-full p-5">{renderContent()}</div>
                 </main>
             </div>
         </div>
