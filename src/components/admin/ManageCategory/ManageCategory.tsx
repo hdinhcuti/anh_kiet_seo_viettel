@@ -1,12 +1,15 @@
+import DeleteModal from '@/components/ui/Modal/components/DeteleModal/DeleteModal';
 import Modal from '@/components/ui/Modal/Modal';
+import { URL_CONFIG } from '@/configs/url-config';
 import { ChevronDown, ChevronUp, ChevronsUpDown, Edit, Plus, RefreshCw, Search, Trash2 } from 'lucide-react';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { toast } from 'sonner';
 import SaveCategory from './SaveCategory';
 
 // Type Definitions
-interface Category {
+export interface Category {
     id: number;
-    name: string;
+    tenDanhMuc: string;
     slug: string;
 }
 
@@ -23,16 +26,23 @@ interface SortIconProps {
 }
 
 const ManageCategory: React.FC = () => {
-    const [data] = useState<Category[]>([
-        { id: 1, name: 'Điện thoại', slug: 'dien-thoai' },
-        { id: 2, name: 'Laptop', slug: 'laptop' },
-        { id: 3, name: 'Tablet', slug: 'tablet' },
-        { id: 4, name: 'Phụ kiện', slug: 'phu-kien' },
-        { id: 5, name: 'Tai nghe', slug: 'tai-nghe' },
-        { id: 6, name: 'Đồng hồ thông minh', slug: 'dong-ho-thong-minh' },
-        { id: 7, name: 'Camera', slug: 'camera' },
-        { id: 8, name: 'PC Gaming', slug: 'pc-gaming' },
-    ]);
+    const fetchData = async (): Promise<Category[]> => {
+        try {
+            const res = await fetch(`${URL_CONFIG.api}/danh-muc-chinh`);
+
+            if (!res.ok) {
+                throw new Error('Request failed');
+            }
+
+            const responseData = await res.json();
+            return responseData.data ?? [];
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    };
+
+    const [data, setData] = useState<Category[]>([]);
 
     const [sortConfig, setSortConfig] = useState<SortConfig>({ key: null, direction: null });
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -40,9 +50,20 @@ const ManageCategory: React.FC = () => {
     const [itemsPerPage] = useState<number>(5);
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
 
-    const [modalChange, setModalChange] = useState(false);
+    const [openCreate, setOpenCreate] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const [nameCategory, setNameCategory] = useState<string>('');
+    const [selected, setSelected] = useState<Category | null>(null);
+
+    useEffect(() => {
+        const loadData = async () => {
+            const result = await fetchData();
+            setData(result);
+        };
+        loadData();
+    }, [openCreate, openEdit, openDelete]);
 
     const handleSort = (key: keyof Category): void => {
         let direction: SortDirection = 'asc';
@@ -59,7 +80,7 @@ const ManageCategory: React.FC = () => {
         if (searchTerm) {
             filtered = filtered.filter(
                 (item) =>
-                    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    item.tenDanhMuc.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     item.slug.toLowerCase().includes(searchTerm.toLowerCase()),
             );
         }
@@ -92,6 +113,38 @@ const ManageCategory: React.FC = () => {
 
     const toggleRowSelection = (id: number): void => {
         setSelectedRows((prev) => (prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]));
+    };
+
+    const handleDelete = async () => {
+        setLoading(true);
+        try {
+            const url = `${URL_CONFIG.api}/danh-muc-chinh/${selected?.id}`;
+            const res = await fetch(url, {
+                method: 'DELETE',
+                // headers: {
+                //     'Content-Type': 'application/json',
+                // },
+                // body: JSON.stringify({
+                //     tenDanhMuc: formData.nameCategory,
+                // }),
+            });
+
+            if (res.status == 201 || res.status == 200) {
+                // const result = await res.json();
+                toast.success(`Xóa danh mục thành công!`);
+                return;
+            }
+
+            if (res.status == 409) {
+                toast.error(`Danh mục đã tồn tại`);
+                return;
+            }
+        } catch (error) {
+            toast.error(`xóa danh mục thất bại! [Lỗi] => ${error}`);
+        } finally {
+            setLoading(false);
+            setOpenDelete(false);
+        }
     };
 
     const toggleSelectAll = (): void => {
@@ -130,20 +183,24 @@ const ManageCategory: React.FC = () => {
                         </div>
 
                         <div className="flex gap-2">
+                            <button
+                                onClick={() => {
+                                    setOpenCreate((prev) => !prev);
+                                }}
+                                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-200 bg-white hover:bg-gray-100 hover:text-gray-900 h-10 px-4 py-2"
+                            >
+                                <Plus className="mr-2 h-4 w-4" />
+                                Thêm
+                            </button>
                             <Modal
-                                onChange={(value) => setModalChange(value)}
-                                open={modalChange}
+                                onChange={(value) => setOpenCreate(value)}
+                                open={openCreate}
                                 title="Thêm danh mục"
-                                trigger={
-                                    <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-200 bg-white hover:bg-gray-100 hover:text-gray-900 h-10 px-4 py-2">
-                                        <Plus className="mr-2 h-4 w-4" />
-                                        Thêm
-                                    </div>
-                                }
                                 classNames="md:w-130 w-80 h-60"
                             >
-                                <SaveCategory type="create" onClose={(value) => setModalChange(value)} />
+                                <SaveCategory type="create" onClose={(value) => setOpenCreate(value)} />
                             </Modal>
+
                             <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-900 text-gray-50 hover:bg-gray-900/90 h-10 px-4 py-2">
                                 <RefreshCw className="mr-2 h-4 w-4" />
                                 Làm mới
@@ -178,11 +235,11 @@ const ManageCategory: React.FC = () => {
                                 </th>
                                 <th
                                     className="h-12 px-4 text-left align-middle font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
-                                    onClick={() => handleSort('name')}
+                                    onClick={() => handleSort('tenDanhMuc')}
                                 >
                                     <div className="flex items-center">
                                         Tên danh mục
-                                        <SortIcon columnKey="name" />
+                                        <SortIcon columnKey="tenDanhMuc" />
                                     </div>
                                 </th>
                                 <th
@@ -223,7 +280,9 @@ const ManageCategory: React.FC = () => {
                                             />
                                         </td>
                                         <td className="p-4 align-middle font-medium text-gray-600">#{item.id}</td>
-                                        <td className="p-4 align-middle font-semibold text-gray-900">{item.name}</td>
+                                        <td className="p-4 align-middle font-semibold text-gray-900">
+                                            {item.tenDanhMuc}
+                                        </td>
                                         <td className="p-4 align-middle text-gray-500">
                                             <code className="bg-gray-100 px-2.5 py-1 rounded text-xs font-mono">
                                                 {item.slug}
@@ -231,12 +290,25 @@ const ManageCategory: React.FC = () => {
                                         </td>
                                         <td className="p-4 align-middle text-right">
                                             <div className="flex justify-end gap-2">
-                                                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-blue-50 h-8 w-8 p-0">
+                                                <div
+                                                    onClick={() => {
+                                                        setSelected(item);
+                                                        setOpenEdit(true);
+                                                    }}
+                                                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-blue-50 h-8 w-8 p-0"
+                                                >
                                                     <Edit className="h-4 w-4 text-blue-600" />
-                                                </button>
-                                                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-red-50 h-8 w-8 p-0">
+                                                </div>
+
+                                                <div
+                                                    onClick={() => {
+                                                        setSelected(item);
+                                                        setOpenDelete(true);
+                                                    }}
+                                                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-red-50 h-8 w-8 p-0"
+                                                >
                                                     <Trash2 className="h-4 w-4 text-red-600" />
-                                                </button>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -296,6 +368,23 @@ const ManageCategory: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                onChange={(value) => setOpenEdit(value)}
+                open={openEdit}
+                title="Sửa danh mục"
+                classNames="md:w-130 w-80 h-60"
+            >
+                <SaveCategory type="update" data={selected} onClose={(value) => setOpenEdit(value)} />
+            </Modal>
+
+            <DeleteModal
+                loading={loading}
+                title={'Xác nhận xóa danh mục'}
+                classNames="md:w-130 w-80 h-45"
+                onChange={(value) => setOpenDelete(value)}
+                open={openDelete}
+                onSubmit={() => handleDelete()}
+            />
         </div>
     );
 };

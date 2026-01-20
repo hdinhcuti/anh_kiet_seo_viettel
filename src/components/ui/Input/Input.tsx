@@ -1,25 +1,19 @@
-import React, { InputHTMLAttributes, forwardRef, useState } from 'react';
+import React, { InputHTMLAttributes, forwardRef } from 'react';
 
-interface ValidationRule {
-    required?: boolean | string;
-    minLength?: { value: number; message: string };
-    maxLength?: { value: number; message: string };
-    pattern?: { value: RegExp; message: string };
-    min?: { value: number; message: string };
-    max?: { value: number; message: string };
-    custom?: { validate: (value: string) => boolean | string; message?: string };
-}
-
+// The component is now a "dumb" or "presentational" component.
+// It has no internal state or validation logic.
+// Its appearance and behavior are fully controlled by the props it receives.
 interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     label?: string;
-    error?: string;
+    error?: string; // The error message to display. This is the only source of truth for the error state.
     helperText?: string;
-    validation?: ValidationRule;
     variant?: 'outlined' | 'filled' | 'standard';
     inputSize?: 'sm' | 'md' | 'lg';
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
-    onValueChange?: (value: string, isValid: boolean) => void;
+    // The 'required' prop is added to explicitly show the asterisk,
+    // rather than inferring it from an internal validation object.
+    required?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,80 +22,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             label,
             error,
             helperText,
-            validation,
             variant = 'outlined',
             inputSize = 'md',
             leftIcon,
             rightIcon,
             className = '',
             disabled,
-            onValueChange,
-            onChange,
-            value,
+            required,
             ...props
         },
         ref,
     ) => {
-        const [internalValue, setInternalValue] = useState(value || '');
-        const [internalError, setInternalError] = useState('');
-
-        const currentValue = value !== undefined ? value : internalValue;
-        const currentError = error || internalError;
-
-        const validateValue = (val: string): string => {
-            if (!validation) return '';
-
-            // UX: chưa nhập gì thì chưa báo lỗi required
-            if (!val) return '';
-
-            if (validation.required && val.trim() === '') {
-                return typeof validation.required === 'string' ? validation.required : 'Trường này là bắt buộc';
-            }
-
-            if (validation.minLength && val.length < validation.minLength.value) {
-                return validation.minLength.message;
-            }
-
-            if (validation.maxLength && val.length > validation.maxLength.value) {
-                return validation.maxLength.message;
-            }
-
-            if (validation.pattern && !validation.pattern.value.test(val)) {
-                return validation.pattern.message;
-            }
-
-            if (validation.min && Number(val) < validation.min.value) {
-                return validation.min.message;
-            }
-
-            if (validation.max && Number(val) > validation.max.value) {
-                return validation.max.message;
-            }
-
-            if (validation.custom) {
-                const result = validation.custom.validate(val);
-                if (result !== true) {
-                    return typeof result === 'string' ? result : validation.custom.message || 'Giá trị không hợp lệ';
-                }
-            }
-
-            return '';
-        };
-
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const newValue = e.target.value;
-
-            if (value === undefined) {
-                setInternalValue(newValue);
-            }
-
-            const errorMsg = validateValue(newValue);
-            setInternalError(errorMsg);
-            onValueChange?.(newValue, !errorMsg);
-
-            onChange?.(e);
-        };
-
         const sizeClasses = {
             sm: 'px-3 py-1.5 text-sm',
             md: 'px-4 py-2 text-base',
@@ -115,7 +46,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         };
 
         const baseClasses = 'w-full rounded-md transition-all duration-200 outline-none';
-        const errorClasses = currentError ? 'border-red-500 focus:border-red-500' : 'border-gray-300';
+        // The error styling is now solely dependent on the presence of the `error` prop.
+        const errorClasses = error ? 'border-red-500 focus:border-red-500' : 'border-gray-300';
         const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed bg-gray-100' : '';
         const iconPadding = leftIcon ? 'pl-10' : rightIcon ? 'pr-10' : '';
 
@@ -124,7 +56,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 {label && (
                     <label className="block mb-2 text-sm font-medium text-gray-700">
                         {label}
-                        {validation?.required && <span className="text-red-500 ml-1">*</span>}
+                        {required && <span className="text-red-500 ml-1">*</span>}
                     </label>
                 )}
 
@@ -135,8 +67,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
                     <input
                         ref={ref}
-                        value={currentValue}
-                        onChange={handleChange}
                         disabled={disabled}
                         className={`
                             ${baseClasses}
@@ -155,7 +85,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     )}
                 </div>
 
-                {currentError && (
+                {error && (
                     <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -164,11 +94,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                                 clipRule="evenodd"
                             />
                         </svg>
-                        {currentError}
+                        {error}
                     </p>
                 )}
 
-                {!currentError && helperText && <p className="mt-1 text-sm text-gray-500">{helperText}</p>}
+                {!error && helperText && <p className="mt-1 text-sm text-gray-500">{helperText}</p>}
             </div>
         );
     },

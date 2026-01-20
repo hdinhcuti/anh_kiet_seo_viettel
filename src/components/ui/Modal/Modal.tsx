@@ -9,16 +9,16 @@ interface IProps {
     onClick?: () => void;
     onChange: (value: boolean) => void;
     open: boolean;
-    trigger: React.ReactNode;
+    // trigger: React.ReactNode;
     children: React.ReactNode;
 }
 
-const Modal = ({ title, classNames, onClick, onChange, open, trigger, children }: IProps) => {
+const Modal = ({ title, classNames, onClick, onChange, open, children }: IProps) => {
     return (
-        <Dialog.Root modal={false} open={open} onOpenChange={(value) => onChange(value)}>
-            <Dialog.Trigger asChild>
+        <Dialog.Root open={open} onOpenChange={(value) => onChange(value)}>
+            {/* <Dialog.Trigger asChild>
                 <button>{trigger}</button>
-            </Dialog.Trigger>
+            </Dialog.Trigger> */}
 
             <Dialog.Portal>
                 <div className="fixed inset-0 bg-style-overlay z-50 " aria-hidden />

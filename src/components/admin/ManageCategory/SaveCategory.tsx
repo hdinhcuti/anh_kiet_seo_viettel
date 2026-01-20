@@ -5,23 +5,27 @@ import { URL_CONFIG } from '@/configs/url-config';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
+import { Category } from './ManageCategory';
 
-// Define the validation schema using Zod
 const formSchema = z.object({
-    nameCategory: z.string().trim().min(2, { message: 'Tên danh mục phải nhiều hơn 2 kí tự' }),
+    nameCategory: z
+        .string()
+        .trim()
+        .min(1, { message: 'Tên danh mục không được để trống' })
+        .min(2, { message: 'Tên danh mục phải nhiều hơn 2 kí tự' }),
 });
 
-// Infer the type from the schema
 type FormData = z.infer<typeof formSchema>;
 
 interface SaveCategoryProps {
     onClose: (value: boolean) => void;
-    value?: string;
+    data?: Category | null;
     type: 'create' | 'update';
 }
 
-const SaveCategory = ({ value, type, onClose }: SaveCategoryProps) => {
+const SaveCategory = ({ data, type, onClose }: SaveCategoryProps) => {
     const [loading, setLoading] = useState(false);
 
     const {
@@ -32,36 +36,37 @@ const SaveCategory = ({ value, type, onClose }: SaveCategoryProps) => {
     } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            nameCategory: value || '',
+            nameCategory: data?.tenDanhMuc || '',
         },
     });
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (formData: FormData) => {
         setLoading(true);
         try {
-            console.log('API:', URL_CONFIG.api);
-            console.log('Submitting data:', data);
-
-            const res = await fetch(`${URL_CONFIG.api}/danh-muc-chinh`, {
-                method: 'POST',
+            const url = `${URL_CONFIG.api}/danh-muc-chinh${data?.id ? `/${data.id}` : ''}`;
+            const res = await fetch(url, {
+                method: type == 'create' ? 'POST' : 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    tenDanhMuc: data.nameCategory,
+                    tenDanhMuc: formData.nameCategory,
                 }),
             });
 
-            if (!res.ok) {
-                throw new Error('Request failed');
+            if (res.status == 201 || res.status == 200) {
+                // const result = await res.json();
+                toast.success(`${type == 'create' ? 'Thêm' : 'Sửa'} danh mục thành công!`);
+                reset({ nameCategory: '' });
+                return;
             }
 
-            const responseData = await res.json();
-            console.log(responseData);
-
-            reset({ nameCategory: '' }); // Reset form after successful submission
+            if (res.status == 409) {
+                toast.error(`Danh mục đã tồn tại`);
+                return;
+            }
         } catch (error) {
-            console.error(error);
+            toast.error(`${type == 'create' ? 'Thêm' : 'Sửa'} danh mục thất bại! [Lỗi] => ${error}`);
         } finally {
             setLoading(false);
             onClose(false);
@@ -74,6 +79,7 @@ const SaveCategory = ({ value, type, onClose }: SaveCategoryProps) => {
                 <Input
                     label="Tên danh mục"
                     type="text"
+                    required={true}
                     error={errors.nameCategory?.message}
                     helperText="Nhập tên danh mục"
                     {...register('nameCategory')}
